@@ -106,6 +106,53 @@ $(document).ready(
 			}
 		});*/
 		
+		jQuery.validator.addMethod("cnpj", function (value, element) {
+
+            var numeros, digitos, soma, i, resultado, pos, tamanho, digitos_iguais;
+            if (value.length == 0) {
+                return true;
+            }
+
+            value = value.replace(/\D+/g, '');
+            digitos_iguais = 1;
+
+            for (i = 0; i < value.length - 1; i++)
+                if (value.charAt(i) != value.charAt(i + 1)) {
+                    digitos_iguais = 0;
+                    break;
+                }
+            if (digitos_iguais)
+                return false;
+
+            tamanho = value.length - 2;
+            numeros = value.substring(0, tamanho);
+            digitos = value.substring(tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2)
+                    pos = 9;
+            }
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+            if (resultado != digitos.charAt(0)) {
+                return false;
+            }
+            tamanho = tamanho + 1;
+            numeros = value.substring(0, tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2)
+                    pos = 9;
+            }
+
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+
+            return (resultado == digitos.charAt(1));
+        })
+		
 		jQuery.validator.addMethod("cpf", function(value, element) {
 			   value = jQuery.trim(value);
 
@@ -135,6 +182,38 @@ $(document).ready(
 			}, "Informe um CPF válido");
 
 		
+		$("#tipoCliente").change(function () {
+			if($("#tipoCliente").val() == 'Fisica'){
+				$("#divCpf").css("display", "block");
+				$("#divRg").css("display", "block");
+				$("#divCnpj").css("display", "none");
+				$("#cnpj").val('');
+			} else {
+				$("#divCpf").css("display", "none");
+				$("#divRg").css("display", "none");
+				$("#divCnpj").css("display", "block");
+				$("#cpf").val('');
+				$("#rg").val('');
+			}
+		});
+		
+		$("#addClienteSec").on("click", function() {
+			$("#divClienteSec").css("display", "block");
+			$("#nomeClienteSec").prop("required", true);
+			$("#add").val('1');
+		});
+		
+		$("#removeDiv").on("click", function() {
+			$("#divClienteSec").css("display", "none");
+			$("#nomeClienteSec").prop("required", false);
+			$("#nomeClienteSec").val('');
+			$("#emailClienteSec").val('');
+			$("#telefoneClienteSec").val('');
+			$("#cpfClienteSec").val('');
+			$("#rgClienteSec").val('');
+		});
+		
+		/*
 		//Adiciona / Remove novos campos no form
 		//Nome
 		$("#addNome").on("click", function() {
@@ -205,32 +284,21 @@ $(document).ready(
 			$("#divRg2").css("display", "none");
 			$("#addRg").prop("disabled", false);
 			$("#rg2").val("");
-		});
+		});*/
 		
 		//Validação
 		$("#novoCliente").validate({
 			rules: {
-				nome1: {
+				nome: {
 					required: true,
 					lettersonly: true
 				},
-				nome2: {
-					required: false,
-					lettersonly: true
-				},
-				email1: {
+				email: {
 					required: true,
 					email: true
 				},
-				email2: {
-					required: false,
-					email: true
-				},
-				telefone1: {
+				telefone: {
 					required: true
-				},
-				telefone2: {
-					required: false
 				},
 				cep: {
 					required: true,
@@ -242,45 +310,40 @@ $(document).ready(
 				complemento: {
 					required: false
 				},
-				cpf1: {
+				cpf: {
 					required: false,
-					cpf: true,
-					notEqualTo: "#cpf2"
+					cpf: true
+					//notEqualTo: "#cpf2"
 				},
-				cpf2: {
+				cnpj:{
 					required: false,
-					cpf: true,
-					notEqualTo: "#cpf1"
+					cnpj: true
 				}
 			},
 			messages: {
-				nome1: {
+				nome: {
 					required: "Informe um nome!",
 				},
-				email1: {
+				email: {
 					required: "Informe um email!",
-					email: "Informe um email válido!"
+					email: "Informe um email valido!"
 				},
-				email2: {
-					email: "Informe um email válido"
-				},
-				telefone1: {
+				telefone: {
 					required: "Informe um telefone!"
 				},
 				cep:{
 					required: "Informe um cep",
 				},
 				numero:{
-					required: "Informe o número",
+					required: "Informe o n&uacute;mero",
 					digits: "Apenas números"
 				},
-				cpf1: {
-					cpf: "CPF inválido!",
+				cpf: {
+					cpf: "CPF invalido!",
 					notEqualTo: "CPFs iguais!"
 				},
-				cpf2: {
-					cpf: "CPF inválido!",
-					notEqualTo: "CPFs iguais!"
+				cnpj: {
+					cnpj: "CNPJ invalido!"
 				}
 			}
 		});
@@ -288,27 +351,16 @@ $(document).ready(
 		//Validação
 		$("#alteraCliente").validate({
 			rules: {
-				nome1: {
+				nome: {
 					required: true,
 					lettersonly: true
 				},
-				nome2: {
-					required: false,
-					lettersonly: true
-				},
-				email1: {
+				email: {
 					required: true,
 					email: true
 				},
-				email2: {
-					required: false,
-					email: true
-				},
-				telefone1: {
+				telefone: {
 					required: true
-				},
-				telefone2: {
-					required: false
 				},
 				cep: {
 					required: true
@@ -320,45 +372,40 @@ $(document).ready(
 				complemento: {
 					required: false
 				},
-				cpf1: {
+				cpf: {
 					required: false,
-					cpf: true,
-					notEqualTo: "#cpf2"
+					cpf: true
+					//notEqualTo: "#cpf2"
 				},
-				cpf2: {
+				cnpj:{
 					required: false,
-					cpf: true,
-					notEqualTo: "#cpf1"
+					cnpj: true
 				}
 			},
 			messages: {
-				nome1: {
+				nome: {
 					required: "Informe um nome!",
 				},
-				email1: {
+				email: {
 					required: "Informe um email!",
-					email: "Informe um email válido!"
+					email: "Informe um email valido!"
 				},
-				email2: {
-					email: "Informe um email válido"
-				},
-				telefone1: {
+				telefone: {
 					required: "Informe um telefone!"
 				},
 				cep:{
 					required: "Informe um cep"
 				},
 				numero:{
-					required: "Informe o número",
+					required: "Informe o n&uacute;mero",
 					digits: "Apenas números"
 				},
-				cpf1: {
-					cpf: "CPF inválido!",
+				cpf: {
+					cpf: "CPF invalido!",
 					 notEqualTo: "CPFs iguais!"
 				},
-				cpf2: {
-					cpf: "CPF inválido!",
-					notEqualTo: "CPFs iguais!"
+				cnpj: {
+					cnpj: "CNPJ invalido!"
 				}
 			}
 		});
@@ -366,56 +413,53 @@ $(document).ready(
 		//Modal de Info.
 		$(document).on("click", ".open-Info", function () {
 			 var id = $(this).data('id');
-			 var nome1 = $(this).data('nome1'); 
-			 var nome2 = $(this).data('nome2'); 
-			 var email1 = $(this).data('email1');
-			 var email2 = $(this).data('email2');
-			 var telefone1 = $(this).data('telefone1');
-			 var telefone2 = $(this).data('telefone2');
-			 var cpf1 = $(this).data('cpf1');
-			 var cpf2 = $(this).data('cpf2');
-			 var rg1 = $(this).data('rg1');
-			 var rg2 = $(this).data('rg2');
-			 var cep = $(this).data('cep');
+			 var tipo = $(this).data('tipo');
+			 var nome = $(this).data('nome'); 
+			 var email = $(this).data('email');
+			 var telefone = $(this).data('telefone');
+			 var cpf = $(this).data('cpf');
+			 var rg = $(this).data('rg');
+			 var cnpj = $(this).data('cnpj');
+			 /*var cep = $(this).data('cep');
 			 var rua = $(this).data('rua');
 			 var bairro = $(this).data('bairro');
 			 var cidade = $(this).data('cidade');
 			 var estado = $(this).data('estado');
 			 var numero = $(this).data('numero');
-			 var complemento = $(this).data('complemento');
-		     $(".modal-body #nome1Info").val( nome1 );
-		     $(".modal-body #nome2Info").val( nome2 );
-		     $(".modal-body #email1Info").val( email1 );
-		     $(".modal-body #email2Info").val( email2 );
-		     $(".modal-body #telefone1Info").val( telefone1 );
-		     $(".modal-body #telefone2Info").val( telefone2 );
-		     $(".modal-body #cpf1Info").val( cpf1 );
-		     $(".modal-body #cpf2Info").val( cpf2 );
-		     $(".modal-body #rg1Info").val( rg1 );
-		     $(".modal-body #rg2Info").val( rg2 );
-		     $(".modal-body #cepInfo").val( cep );
+			 var complemento = $(this).data('complemento');*/
+		     $(".modal-body #nomeInfo").val( nome );
+		     $(".modal-body #tipoInfo").val( tipo );
+		     $(".modal-body #emailInfo").val( email );
+		     $(".modal-body #telefoneInfo").val( telefone );
+		     $(".modal-body #cpfInfo").val( cpf );
+		     $(".modal-body #rgInfo").val( rg );
+		     $(".modal-body #cnpjInfo").val( cnpj );
+		     $(".modal-title #id").html( id );
+		     /*$(".modal-body #cepInfo").val( cep );
 		     $(".modal-body #ruaInfo").val( rua );
 		     $(".modal-body #bairroInfo").val( bairro );
 		     $(".modal-body #cidadeInfo").val( cidade );
 		     $(".modal-body #estadoInfo").val( estado );
 		     $(".modal-body #numeroInfo").val( numero );
-		     $(".modal-body #complementoInfo").val( complemento );
-		     $(".modal-title #id").html( id );
+		     $(".modal-body #complementoInfo").val( complemento );*/
+		     if(cnpj != ''){
+		    	 $("#divPf").css("display", "none");
+		    	 $("#divPj").css("display", "block");
+		     } else {
+		    	 $("#divPj").css("display", "none");
+		    	 $("#divPf").css("display", "block");
+		     }
+		     
 		});
 		
 		//Modal de Alteração
 		$(document).on("click", ".open-Alt", function () {
 			 var id = $(this).data('id');
-			 var nome1 = $(this).data('nome1'); 
-			 var nome2 = $(this).data('nome2'); 
-			 var email1 = $(this).data('email1');
-			 var email2 = $(this).data('email2');
-			 var telefone1 = $(this).data('telefone1');
-			 var telefone2 = $(this).data('telefone2');
-			 var cpf1 = $(this).data('cpf1');
-			 var cpf2 = $(this).data('cpf2');
-			 var rg1 = $(this).data('rg1');
-			 var rg2 = $(this).data('rg2');
+			 var nome = $(this).data('nome'); 
+			 var email = $(this).data('email');
+			 var telefone = $(this).data('telefone');
+			 var cpf = $(this).data('cpf');
+			 var rg = $(this).data('rg');
 			 var cep = $(this).data('cep');
 			 var rua = $(this).data('rua');
 			 var bairro = $(this).data('bairro');
@@ -423,16 +467,11 @@ $(document).ready(
 			 var estado = $(this).data('estado');
 			 var numero = $(this).data('numero');
 			 var complemento = $(this).data('complemento');
-		     $(".modal-body #nome1").val( nome1 );
-		     $(".modal-body #nome2").val( nome2 );
-		     $(".modal-body #email1").val( email1 );
-		     $(".modal-body #email2").val( email2 );
-		     $(".modal-body #telefone1").val( telefone1 );
-		     $(".modal-body #telefone2").val( telefone2 );
-		     $(".modal-body #cpf1").val( cpf1 );
-		     $(".modal-body #cpf2").val( cpf2 );
-		     $(".modal-body #rg1").val( rg1 );
-		     $(".modal-body #rg2").val( rg2 );
+		     $(".modal-body #nome").val( nome );
+		     $(".modal-body #email").val( email );
+		     $(".modal-body #telefone").val( telefone );
+		     $(".modal-body #cpf").val( cpf );
+		     $(".modal-body #rg").val( rg );
 		     $(".modal-body #cep").val( cep );
 		     $(".modal-body #rua").val( rua );
 		     $(".modal-body #bairro").val( bairro );
@@ -445,31 +484,28 @@ $(document).ready(
 		});
 		
 		//Mascaras - Form
-		$('#telefone1').inputmask({
+		$('#telefoneClienteSec').inputmask({
+			"mask": '(99) 9999-9999[9]', placeholder: "", showMaskOnHover: false, showMaskOnFocus: false
+		});
+	    $('#cpfClienteSec').inputmask('999.999.999-99', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
+	    $('#rgClienteSec').inputmask('99.999.999-9', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
+	    
+		$('#telefone').inputmask({
 				"mask": '(99) 9999-9999[9]', placeholder: "", showMaskOnHover: false, showMaskOnFocus: false
 		});
-	    $('#telefone2').inputmask({
-				"mask": '(99) 9999-9999[9]', placeholder: "", showMaskOnHover: false, showMaskOnFocus: false
-		});
+		$('#cnpj').inputmask({"mask": '99.999.999/9999-99', placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
 	    $('#cep').inputmask('99999-999', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
-	    $('#cpf1').inputmask('999.999.999-99', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
-	    $('#cpf2').inputmask('999.999.999-99', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
-	    $('#rg1').inputmask('99.999.999-9', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
-	    $('#rg2').inputmask('99.999.999-9', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
+	    $('#cpf').inputmask('999.999.999-99', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
+	    $('#rg').inputmask('99.999.999-9', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
 	    $('#numero').inputmask('[99999]', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
 	    
 	    //Mascaras - Modal de alteração
-	    $('.modal2 #telefone1').inputmask({
+	    $('.modal2 #telefone').inputmask({
 			"mask": '(99) 9999-9999[9]', placeholder: "", showMaskOnHover: false, showMaskOnFocus: false
 		});
-	    $('.modal2 #telefone2').inputmask({
-				"mask": '(99) 9999-9999[9]', placeholder: "", showMaskOnHover: false, showMaskOnFocus: false
-		});
 	    $('.modal2 #cep').inputmask('99999-999', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
-	    $('.modal2 #cpf1').inputmask('999.999.999-99', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
-	    $('.modal2 #cpf2').inputmask('999.999.999-99', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
-	    $('.modal2 #rg1').inputmask('99.999.999-9', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
-	    $('.modal2 #rg2').inputmask('99.999.999-9', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
+	    $('.modal2 #cpf').inputmask('999.999.999-99', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
+	    $('.modal2 #rg').inputmask('99.999.999-9', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
 	    $('.modal2 #numero').inputmask('[99999]', {placeholder: "", showMaskOnHover: false, showMaskOnFocus: false});
 	    
 	  

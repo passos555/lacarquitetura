@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.lac.dao.ClienteDAO;
-import br.com.lac.models.CategoriaProjeto;
 import br.com.lac.models.TipoProjeto;
 
 @Controller
@@ -21,7 +20,6 @@ public class ProjetoController {
 		
 		ModelAndView model = new ModelAndView("projetos/novo");
 		model.addObject("tipoProjeto", TipoProjeto.values());
-		model.addObject("categoriaProjeto", CategoriaProjeto.values());
 		model.addObject("clientes", clienteDao.list());
 		
 		return model;

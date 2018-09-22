@@ -43,9 +43,6 @@ public class Projeto {
 	@Enumerated(EnumType.STRING)
 	private TipoProjeto tipoProjeto;
 	
-	@Enumerated(EnumType.STRING)
-	private CategoriaProjeto categoriaProjeto;
-	
 	public Long getIdProjeto() {
 		return idProjeto;
 	}
@@ -198,14 +195,6 @@ public class Projeto {
 		this.tipoProjeto = tipoProjeto;
 	}
 
-	public CategoriaProjeto getCategoriaProjeto() {
-		return categoriaProjeto;
-	}
-
-	public void setCategoriaProjeto(CategoriaProjeto categoriaProjeto) {
-		this.categoriaProjeto = categoriaProjeto;
-	}
-	
 	
 	
 }

@@ -59,7 +59,6 @@
 										<th>Código</th>
 										<th>Nome</th>
 										<th>Email</th>
-										<th>Tipo</th>
 										<th width="8%">Mais Info.</th>
 										<th width="5%">Alterar</th>
 									</tr>
@@ -70,16 +69,16 @@
 											<td>${cliente.idCliente }</td>
 											<td>${cliente.nome }</td>
 											<td>${cliente.email }</td>
-											<td>${cliente.tipoCliente.toString() }</td>
+											
 											<td align="center"><a class="open-Info" href="#modal-info"
 						                  	 data-toggle="modal" data-target=".modal1" data-nome="${cliente.nome }"
 						                  	 data-email="${cliente.email }"
 						                  	 data-telefone="${cliente.telefone }"
 						                  	 data-cpf="${cliente.cpf }"
 						                  	 data-rg="${cliente.rg }"
-						                  	 data-tipo="${cliente.tipoCliente.toString() }"
-						                  	 data-cnpj="${cliente.cnpj }"
-						                  	 data-id="${cliente.idCliente }"><i class="fa fa-plus-circle"></i></a></td>
+						                  	 data-cep="${cliente.cep }" data-rua="${cliente.rua }" data-bairro="${cliente.bairro }"
+						                  	 data-cidade="${cliente.cidade }" data-estado="${cliente.estado }" data-numero="${cliente.numero }"
+						                  	 data-complemento="${cliente.complemento }" data-id="${cliente.idCliente }"><i class="fa fa-plus-circle"></i></a></td>
 											
 											<td align="center"><a class="open-Alt" href="#modal-alteracao"
 						                  	 data-toggle="modal" data-target=".modal2" data-nome="${cliente.nome }"
@@ -87,7 +86,9 @@
 						                  	 data-telefone="${cliente.telefone }"
 						                  	 data-cpf="${cliente.cpf }"
 						                  	 data-rg="${cliente.rg }"
-						                  	 data-id="${cliente.idCliente }"><i class="fa fa-wrench"></i></a></td>
+						                  	 data-cep="${cliente.cep }" data-rua="${cliente.rua }" data-bairro="${cliente.bairro }"
+						                  	 data-cidade="${cliente.cidade }" data-estado="${cliente.estado }" data-numero="${cliente.numero }"
+						                  	 data-complemento="${cliente.complemento }" data-id="${cliente.idCliente }"><i class="fa fa-wrench"></i></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -115,27 +116,18 @@
 						<div class="box-body">
 							<input type="hidden" value="" name="idCliente" id="idCliente">
 							<div class="row">
-								
-								<div class="col-md-4">
-									<label>Tipo Cliente</label>
-									<div style="width:100%" class="input-group form-group">
-										<input type="email" class="form-control"
-											name="tipo" id="tipoInfo" readOnly>
-									</div>
-								</div>
-							
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<label>Nome</label>
-									<div style="width:100%" class="input-group form-group">
-										<input type="text" class="form-control"
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
 											name="nome" id="nomeInfo" readOnly>
 									</div>
 								</div>
 								
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<label>Email</label>
-									<div style="width:100%" class="input-group form-group">
-										<input type="email" class="form-control"
+									<div class="input-group form-group">
+										<input style="width: 105%" type="email" class="form-control"
 											name="email" id="emailInfo" readOnly>
 									</div>
 								</div>
@@ -143,43 +135,94 @@
 							</div>
 
 							<div class="row">
-								
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<label>Telefone</label>
-									<div style="width:100%" class="input-group form-group">
-										<input type="text" class="form-control"
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
 											name="telefone" id="telefoneInfo" readOnly>
 									</div>
 								</div>
 								
-								<div id="divPf">
-									<div class="col-md-4">
-										<label>CPF</label>
-										<div style="width:100%" class="input-group form-group">
-											<input type="text" class="form-control"
-												name="cpf" id="cpfInfo" readOnly>
-										</div>
-									</div>
-									
-									<div class="col-md-4">
-										<label>RG</label>
-										<div style="width: 100%" class="input-group form-group">
-											<input type="text" class="form-control"
-												name="rg" id="rgInfo" readOnly>
-										</div>
+								<div class="col-md-3">
+									<label>CPF</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="cpf" id="cpfInfo" readOnly>
 									</div>
 								</div>
 								
-								<div id="divPj">
-									<div class="col-md-4">
-										<label>CNPJ</label>
-										<div style="width:100%" class="input-group form-group">
-											<input type="text" class="form-control"
-												name="cnpj" id="cnpjInfo" readOnly>
-										</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-3">
+									<label>RG</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="rg" id="rgInfo" readOnly>
 									</div>
 								</div>
-								
+						
+								<div class="col-md-3">
+									<label>CEP</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="cep" id="cepInfo" readOnly>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label>Rua</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="rua" id="ruaInfo" readOnly>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-3">
+									<label>Bairro</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="bairro" id="bairroInfo" readOnly>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label>Cidade</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="cidade" id="cidadeInfo" readOnly>
+									</div>
+								</div>
+								<div class="col-md-1">
+									<label>Estado</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="estado" id="estadoInfo" readOnly>
+									</div>
+								</div>
+								<div class="col-md-1" style="margin-right: 73px;">
+									<label>Número</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="numero" id="numeroInfo" readOnly>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label>Complemento</label>
+									<div class="input-group form-group">
+										<input style="width: 105%" type="text" class="form-control"
+											name="complemento" id="complementoInfo" readOnly>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-8">
+									<label>Projetos</label>
+									<div class="input-group form-group">
+										
+									</div>
+								</div>
 							</div>
 
 						</div>

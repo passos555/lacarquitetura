@@ -13,7 +13,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.lac.dao.ClienteDAO;
 import br.com.lac.models.Cliente;
+import br.com.lac.models.ClienteSecundario;
 import br.com.lac.models.Status;
+import br.com.lac.models.TipoCliente;
 
 @Controller
 public class ClienteController {
@@ -25,7 +27,7 @@ public class ClienteController {
 	@RequestMapping("/clientes/novo")
 	public ModelAndView open() {
 		ModelAndView model = new ModelAndView("clientes/novo");
-
+		model.addObject("tiposCliente", TipoCliente.values());
 		return model;
 	}
 
@@ -41,15 +43,31 @@ public class ClienteController {
 
 	// Salva novo cliente
 	@CacheEvict(value = "clientList", allEntries = true)
-	@RequestMapping(value = "/clientes/novo", method = RequestMethod.POST)
-	public ModelAndView save(Cliente pCliente, RedirectAttributes redirectAttributes) {
+	@RequestMapping(params = "save", value = "/clientes/novo", method = RequestMethod.POST)
+	public ModelAndView save(Cliente pCliente, ClienteSecundario pClienteSec, RedirectAttributes redirectAttributes) {
 		ModelAndView model = new ModelAndView("redirect:/clientes/novo");
-
-		if (clienteDao.findClientByCpf(pCliente)) {
-			redirectAttributes.addFlashAttribute("erro", "Este CPF já foi cadastrado!");
-			return model;
+		
+		if(!pClienteSec.getNomeClienteSec().isEmpty()) {
+			Cliente lClienteSec = new Cliente();
+			lClienteSec.setNome(pClienteSec.getNomeClienteSec());
+			lClienteSec.setEmail(pClienteSec.getEmailClienteSec());
+			lClienteSec.setTelefone(pClienteSec.getTelefoneClienteSec());
+			lClienteSec.setCpf(pClienteSec.getCpfClienteSec());
+			lClienteSec.setRg(pClienteSec.getRgClienteSec());
+			lClienteSec.setStatus(Status.Ativo);
+			lClienteSec.setTipoCliente(TipoCliente.Fisica);
+			
+			clienteDao.saveClient(lClienteSec);
+			pCliente.setClienteSec(lClienteSec);
 		}
-
+		
+		if(!pCliente.getCpf().isEmpty()) {
+			if (clienteDao.findClientByCpf(pCliente)) {
+				redirectAttributes.addFlashAttribute("erro", "Este CPF já foi cadastrado!");
+				return model;
+			}
+		}
+		
 		pCliente.setStatus(Status.Ativo);
 		clienteDao.saveClient(pCliente);
 		redirectAttributes.addFlashAttribute("sucesso", "Cliente cadastrado com sucesso!");

@@ -41,182 +41,164 @@
               </div>
             </c:if>
 
-				<div class="box-body">
-					<form:form id="novoCliente" action="${s:mvcUrl('CC#save').build() }" method="POST">
-					<!-- Linha 1 -->
-					<div class="row">
+				
+				<form:form class="form-horizontal" id="novoCliente" action="${s:mvcUrl('CC#save').build() }" method="POST">
+					<div class="box-body">
 
-						<div id="divNome" class="col-md-4">
-							<label>Nome*</label>
-							<div class="input-group form-group">
-								<input type="text" class="form-control"
-									name="nome1" id="nome1" required>
-									<span class="input-group-btn">
-                      					<button id="addNome" type="button" class="btn btn-primary btn-flat">+</button>
-                    				</span>
-							</div>	
+						<div class="form-group">
+							<label class="col-sm-5 control-label">Tipo Cliente*</label>
+							<div class="col-sm-2">
+								<select name="tipoCliente" id="tipoCliente"
+									class="form-control select2 select2-hidden-accessible"
+									style="width: 100%;" tabindex="-1" aria-hidden="true" required>
+									<c:forEach items="${tiposCliente }" var="tipoCliente">
+										<option value="${tipoCliente}">${tipoCliente.name}</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="nome" class="col-sm-5 control-label">Nome*</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="nome" id="nome"
+									required>
+							</div>
 						</div>
 						
-						<div id="divNome2" style="display:none;" class="col-md-2">
-							<label>Nome 2 - Opcional</label>
-							<div class="input-group form-group">
-								<input type="text" class="form-control"
-									name="nome2" id="nome2">
-								<span class="input-group-btn">
-                     				<button id="removeNome" type="button" class="btn btn-primary btn-flat">-</button>
-                   				</span>
-							</div>	
-						</div>
-						
-						<div id="divEmail" class="col-md-4">
-							<label>Email*</label> 
-							<div class="input-group form-group">
+						<div class="form-group">
+							<label for="nome" class="col-sm-5 control-label">Email*</label>
+							<div class="col-sm-2">
 								<input type="email" class="form-control"
-									name="email1" id="email1" required>
-								<span class="input-group-btn">
-                     				<button id="addEmail" type="button" class="btn btn-primary btn-flat">+</button>
-                   				</span>
+									name="email" id="email" required>
 							</div>
 						</div>
 						
-						<div id="divEmail2" style="display:none;" class="col-md-2">
-							<label>Email 2 - Opcional</label>
-							<div class="input-group form-group">
-								<input type="email" class="form-control"
-									name="email2" id="email2">
-								<span class="input-group-btn">
-                     				<button id="removeEmail" type="button" class="btn btn-primary btn-flat">-</button>
-                   				</span>
-							</div>	
-						</div>
-						
-						<div id="divTel" class="col-md-4">
-							<label>Telefone*</label> 
-							<div class="input-group form-group">
+						<div class="form-group">
+							<label for="nome" class="col-sm-5 control-label">Telefone*</label>
+							<div class="col-sm-2">
 								<input type="text" class="form-control"
-									name="telefone1" id="telefone1">
-								<span class="input-group-btn">
-                     				<button id="addTel" type="button" class="btn btn-primary btn-flat">+</button>
-                   				</span>
+									name="telefone" id="telefone">
 							</div>
 						</div>
 						
-						<div id="divTel2" style="display:none;" class="col-md-2">
-							<label>Telefone2 - Opcional</label> 
-							<div class="input-group form-group">
+						<div id="divCpf" class="form-group">
+							<label for="nome" class="col-sm-5 control-label">CPF</label>
+							<div class="col-sm-2">
 								<input type="text" class="form-control"
-									name="telefone2" id="telefone2">
-								<span class="input-group-btn">
-                     				<button id="removeTel" type="button" class="btn btn-primary btn-flat">-</button>
-                   				</span>
-							</div>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div id="divCpf" class="col-md-6">
-							<label>CPF</label>
-							<div class="input-group form-group">
-								<input type="text" class="form-control"
-									name="cpf1" id="cpf1">
-								<span class="input-group-btn">
-                     				<button id="addCpf" type="button" class="btn btn-primary btn-flat">+</button>
-                   				</span>
+									name="cpf" id="cpf">
 							</div>
 						</div>
 						
-						<div id="divCpf2" style="display:none" class="col-md-3">
-							<label>CPF 2 - Opcional</label>
-							<div class="input-group form-group">
+						<div id="divRg" class="form-group">
+							<label for="nome" class="col-sm-5 control-label">RG</label>
+							<div class="col-sm-2">
 								<input type="text" class="form-control"
-									name="cpf2" id="cpf2">
-								<span class="input-group-btn">
-                     				<button id="removeCpf" type="button" class="btn btn-primary btn-flat">-</button>
-                   				</span>
+									name="rg" id="rg">
 							</div>
 						</div>
 						
-						<div id="divRg" class="col-md-6">
-							<label>RG</label>
-							<div class="input-group form-group">
+						<div style="display:none;" id="divCnpj" class="form-group">
+							<label for="nome" class="col-sm-5 control-label">CNPJ</label>
+							<div class="col-sm-2">
 								<input type="text" class="form-control"
-									name="rg1" id="rg1">
-								<span class="input-group-btn">
-                     				<button id="addRg" type="button" class="btn btn-primary btn-flat">+</button>
-                   				</span>
+									name="cnpj" id="cnpj">
 							</div>
 						</div>
 						
-						<div id="divRg2" style="display:none" class="col-md-3">
-							<label>RG 2 - Opcional</label>
-							<div class="input-group form-group">
-								<input type="text" class="form-control"
-									name="rg2" id="rg2">
-								<span class="input-group-btn">
-                     				<button id="removeRg" type="button" class="btn btn-primary btn-flat">-</button>
-                   				</span>
-							</div>
-						</div>
 						
-					</div>
-					
-					<div class="row">
+						<!-- 
 						<div class="col-md-2">
 							<div class="input-group form-group">
 								<label>CEP*</label> <input type="text" class="form-control"
 									name="cep" id="cep" maxlength="9" required>
 								<span style="top: 25px;" class="input-group-btn">
-                     				<a href="http://www.buscacep.correios.com.br/sistemas/buscacep/"
-                     				target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-flat">
-                     				<i class="fa fa-search"></i>
-                     				</a>
-                   				</span>
+	                    				<a href="http://www.buscacep.correios.com.br/sistemas/buscacep/"
+	                    				target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-flat">
+	                    				<i class="fa fa-search"></i>
+	                    				</a>
+	                  				</span>
 							</div>
+						</div>
+						 -->
+						 
+						 <!-- Cliente Secudário -->
+						<div id="divClienteSec" style="display:none">
+						
+							<div align="center" class="box-footer">					
+							  <span style="font-size:18px">Cliente secundário</span>
+							  <div class="box-tools pull-right">
+					            <button type="button" id="removeDiv" class="btn btn-box-tool"><i class="fa fa-remove"></i></button>
+					          </div>
+								
+							</div>
+						
+						
+							<div class="form-group">
+								<label class="col-sm-5 control-label">Tipo Cliente</label>
+								<div class="col-sm-2">
+									<select disabled name="tipoClienteSec"
+										class="form-control select2 select2-hidden-accessible"
+										style="width: 100%;" tabindex="-1" aria-hidden="true">
+											<option value="1">Pessoa Física</option>
+									</select>
+								</div>
+							</div>
+	
+							<div class="form-group">
+								<label for="nome" class="col-sm-5 control-label">Nome*</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="nomeClienteSec" id="nomeClienteSec" required>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="nome" class="col-sm-5 control-label">Email</label>
+								<div class="col-sm-2">
+									<input type="email" class="form-control" id="emailClienteSec"
+										name="emailClienteSec">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="nome" class="col-sm-5 control-label">Telefone</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="telefoneClienteSec"
+										name="telefoneClienteSec">
+								</div>
+							</div>
+							
+							<div id="divCpf" class="form-group">
+								<label for="nome" class="col-sm-5 control-label">CPF</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="cpfClienteSec"
+										name="cpfClienteSec">
+								</div>
+							</div>
+							
+							<div id="divRg" class="form-group">
+								<label for="nome" class="col-sm-5 control-label">RG</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="rgClienteSec"
+										name="rgClienteSec">
+								</div>
+							</div>
+							
 						</div>
 						
-						<div class="col-sm-2">
-							<div class="form-group">
-								<label>Rua</label><input type="text" class="form-control" name="rua" id="rua" readOnly>
-							</div>
-						</div>
 						
-						<div class="col-sm-2">
-							<div class="form-group">
-								<label>Bairro</label><input type="text" class="form-control" name="bairro" id="bairro" readOnly>
-							</div>
-						</div>
 						
-						<div class="col-sm-2">
-							<div class="form-group">
-								<label>Cidade</label><input type="text" class="form-control" name="cidade" id="cidade" readOnly>
-							</div>
-						</div>
-						
-						<div class="col-sm-1">
-							<div class="form-group">
-								<label>Estado</label><input type="text" class="form-control" name="estado" id="uf" readOnly>
-							</div>
-						</div>
-						
-						<div class="col-sm-1">
-							<div class="form-group">
-								<label>Número*</label><input type="text" class="form-control" name="numero" id="numero" required>
-							</div>
-						</div>
-						
-						<div class="col-sm-2">
-							<div class="form-group">
-								<label>Complemento</label><input type="text" class="form-control" name="complemento" id="complemento">
-							</div>
-						</div>
 					</div>
 					
-					<div align="center" class="box-footer">
-	                	<button onclick="run_waitMe();" type="submit" class="btn btn-primary btn-md">Cadastrar</button>
-	              	</div> 
 					
-					</form:form>
-				</div>
+					<div align="center" class="box-footer">					
+						
+							<input onclick="run_waitMe();"  class="btn btn-primary btn-md" type = "submit" name="save" value="Cadastrar"/>
+							
+							<input onclick="run_waitMe();" id="addClienteSec"  class="btn btn-primary btn-md" type="button" value="Cliente secundário"/>
+							
+					</div>
+				</form:form>
 			</div>
 		</section>
 	</div>
