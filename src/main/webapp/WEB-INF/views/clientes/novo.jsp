@@ -107,6 +107,41 @@
 						</div>
 						
 						
+						<!-- ENDEREÇO -->
+						<div class="form-group">
+							<label class="col-sm-5 control-label">Endereço*</label>
+							<div class="col-sm-2">
+								<select name="endereco" id="endereco"
+									class="form-control select2 select2-hidden-accessible"
+									style="width: 100%;" tabindex="-1" aria-hidden="true" required>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-5 control-label"></label>
+							<div style="text-align:center;" class="col-sm-1">
+								<span class="input-group-btn">
+                    				<a href="#"
+                    				 title="Adicionar endereço" class="btn btn-primary btn-flat">
+                    				<i class="fa fa-plus-circle"></i>
+                    				</a>
+	                  			</span>
+							</div>
+							<div style="text-align:center;" class="col-sm-1">
+								<span class="input-group-btn">
+                    				<a href="#"
+                    				 title="Alterar endereço" class="btn btn-primary btn-flat">
+                    				<i class="fa fa-edit"></i>
+                    				</a>
+	                  			</span>
+							</div>
+							
+						</div>
+						
+						
+						
+						
 						<!-- 
 						<div class="col-md-2">
 							<div class="input-group form-group">
