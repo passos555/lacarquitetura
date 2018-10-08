@@ -36,11 +36,15 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.google.common.cache.CacheBuilder;
 
 import br.com.lac.controllers.HomeController;
+import br.com.lac.dao.CategoriaDAO;
 import br.com.lac.dao.ClienteDAO;
+import br.com.lac.dao.EnderecoDAO;
 import br.com.lac.dao.UsuarioDAO;
+import br.com.lac.models.TipoProjeto;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, UsuarioDAO.class, ClienteDAO.class })
+@ComponentScan(basePackageClasses = { HomeController.class, UsuarioDAO.class, ClienteDAO.class, EnderecoDAO.class,
+		CategoriaDAO.class, TipoProjeto.class})
 @EnableCaching
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 

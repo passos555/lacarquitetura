@@ -35,7 +35,7 @@
 	      
 	      <ol class="breadcrumb">
 	        <li>Home</li>
-	        <li>Usu&aacute;rios</li>
+	        <li>Usu&aacute;rio</li>
 	        <li class="active">Consulta Usu&aacute;rio</li>
 	      </ol>
 	    </section>
@@ -50,7 +50,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="userTable" class="table table-bordered table-hover">
+              <table id="generalTable" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>Nome</th>

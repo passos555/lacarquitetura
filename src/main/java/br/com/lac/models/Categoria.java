@@ -6,19 +6,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class TipoProjeto {
+public class Categoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idTipoProjeto;
+	private Long idCategoria;
 	private String descricao;
 	private String observacao;
 	
-	public Long getIdTipoProjeto() {
-		return idTipoProjeto;
+	public Long getIdCategoria() {
+		return idCategoria;
 	}
-	public void setIdTipoProjeto(Long idTipoProjeto) {
-		this.idTipoProjeto = idTipoProjeto;
+	public void setIdCategoria(Long idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -32,6 +32,7 @@ public class TipoProjeto {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+	
 	
 	
 }

@@ -22,9 +22,10 @@ public class ClienteDAO {
 	}
 
 	public List<Cliente> list() {
-		return manager.createQuery("select c from Cliente c order by c.nome", Cliente.class).getResultList();
+		return manager.createQuery("select c from Cliente c", Cliente.class).getResultList();
 	}
-
+	
+	
 	public boolean findClientByCpf(Cliente pCliente) {
 
 		try {

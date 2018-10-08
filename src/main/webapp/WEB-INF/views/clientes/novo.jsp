@@ -13,7 +13,7 @@
 			</h1>
 			<ol class="breadcrumb">
 				<li>Home</li>
-				<li>Clientes</li>
+				<li>Cliente</li>
 				<li class="active">Novo Cliente</li>
 			</ol>
 		</section>
@@ -46,8 +46,8 @@
 					<div class="box-body">
 
 						<div class="form-group">
-							<label class="col-sm-5 control-label">Tipo Cliente*</label>
-							<div class="col-sm-2">
+							<label class="col-sm-4 control-label">Tipo Cliente*</label>
+							<div class="col-sm-4">
 								<select name="tipoCliente" id="tipoCliente"
 									class="form-control select2 select2-hidden-accessible"
 									style="width: 100%;" tabindex="-1" aria-hidden="true" required>
@@ -59,48 +59,48 @@
 						</div>
 
 						<div class="form-group">
-							<label for="nome" class="col-sm-5 control-label">Nome*</label>
-							<div class="col-sm-2">
+							<label for="nome" class="col-sm-4 control-label">Nome*</label>
+							<div class="col-sm-4">
 								<input type="text" class="form-control" name="nome" id="nome"
 									required>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label for="nome" class="col-sm-5 control-label">Email*</label>
-							<div class="col-sm-2">
+							<label for="nome" class="col-sm-4 control-label">Email*</label>
+							<div class="col-sm-4">
 								<input type="email" class="form-control"
 									name="email" id="email" required>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label for="nome" class="col-sm-5 control-label">Telefone*</label>
-							<div class="col-sm-2">
+							<label for="nome" class="col-sm-4 control-label">Telefone*</label>
+							<div class="col-sm-4">
 								<input type="text" class="form-control"
 									name="telefone" id="telefone">
 							</div>
 						</div>
 						
 						<div id="divCpf" class="form-group">
-							<label for="nome" class="col-sm-5 control-label">CPF</label>
-							<div class="col-sm-2">
+							<label for="nome" class="col-sm-4 control-label">CPF</label>
+							<div class="col-sm-4">
 								<input type="text" class="form-control"
 									name="cpf" id="cpf">
 							</div>
 						</div>
 						
 						<div id="divRg" class="form-group">
-							<label for="nome" class="col-sm-5 control-label">RG</label>
-							<div class="col-sm-2">
+							<label for="nome" class="col-sm-4 control-label">RG</label>
+							<div class="col-sm-4">
 								<input type="text" class="form-control"
 									name="rg" id="rg">
 							</div>
 						</div>
 						
 						<div style="display:none;" id="divCnpj" class="form-group">
-							<label for="nome" class="col-sm-5 control-label">CNPJ</label>
-							<div class="col-sm-2">
+							<label for="nome" class="col-sm-4 control-label">CNPJ</label>
+							<div class="col-sm-4">
 								<input type="text" class="form-control"
 									name="cnpj" id="cnpj">
 							</div>
@@ -109,28 +109,33 @@
 						
 						<!-- ENDEREÇO -->
 						<div class="form-group">
-							<label class="col-sm-5 control-label">Endereço*</label>
-							<div class="col-sm-2">
-								<select name="endereco" id="endereco"
+							<label class="col-sm-4 control-label">Endereço</label>
+							<div class="col-sm-4">
+								<select name="pEndereco" id="endereco"
 									class="form-control select2 select2-hidden-accessible"
-									style="width: 100%;" tabindex="-1" aria-hidden="true" required>
+									style="width: 100%;" tabindex="-1" aria-hidden="true">
+									<option value="0" selected></option>
+									<c:forEach items="${enderecos }" var="endereco">
+										<option value="${endereco.idEndereco}">${endereco.idEndereco} - ${endereco.rua}</option>
+									</c:forEach>
 								</select>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-5 control-label"></label>
-							<div style="text-align:center;" class="col-sm-1">
+							<label class="col-sm-4 control-label"></label>
+							<div style="text-align:center;" class="col-sm-2">
 								<span class="input-group-btn">
-                    				<a href="#"
+                    				<a href="#" style="width:100%"
+						             data-toggle="modal" data-target=".modal1"
                     				 title="Adicionar endereço" class="btn btn-primary btn-flat">
                     				<i class="fa fa-plus-circle"></i>
                     				</a>
 	                  			</span>
 							</div>
-							<div style="text-align:center;" class="col-sm-1">
+							<div style="text-align:center;" class="col-sm-2">
 								<span class="input-group-btn">
-                    				<a href="#"
+                    				<a href="#" style="width:100%"
                     				 title="Alterar endereço" class="btn btn-primary btn-flat">
                     				<i class="fa fa-edit"></i>
                     				</a>
@@ -138,24 +143,6 @@
 							</div>
 							
 						</div>
-						
-						
-						
-						
-						<!-- 
-						<div class="col-md-2">
-							<div class="input-group form-group">
-								<label>CEP*</label> <input type="text" class="form-control"
-									name="cep" id="cep" maxlength="9" required>
-								<span style="top: 25px;" class="input-group-btn">
-	                    				<a href="http://www.buscacep.correios.com.br/sistemas/buscacep/"
-	                    				target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-flat">
-	                    				<i class="fa fa-search"></i>
-	                    				</a>
-	                  				</span>
-							</div>
-						</div>
-						 -->
 						 
 						 <!-- Cliente Secudário -->
 						<div id="divClienteSec" style="display:none">
@@ -170,8 +157,8 @@
 						
 						
 							<div class="form-group">
-								<label class="col-sm-5 control-label">Tipo Cliente</label>
-								<div class="col-sm-2">
+								<label class="col-sm-4 control-label">Tipo Cliente</label>
+								<div class="col-sm-4">
 									<select disabled name="tipoClienteSec"
 										class="form-control select2 select2-hidden-accessible"
 										style="width: 100%;" tabindex="-1" aria-hidden="true">
@@ -181,54 +168,89 @@
 							</div>
 	
 							<div class="form-group">
-								<label for="nome" class="col-sm-5 control-label">Nome*</label>
-								<div class="col-sm-2">
+								<label for="nome" class="col-sm-4 control-label">Nome*</label>
+								<div class="col-sm-4">
 									<input type="text" class="form-control" name="nomeClienteSec" id="nomeClienteSec" required>
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<label for="nome" class="col-sm-5 control-label">Email</label>
-								<div class="col-sm-2">
+								<label for="nome" class="col-sm-4 control-label">Email</label>
+								<div class="col-sm-4">
 									<input type="email" class="form-control" id="emailClienteSec"
 										name="emailClienteSec">
 								</div>
 							</div>
 							
 							<div class="form-group">
-								<label for="nome" class="col-sm-5 control-label">Telefone</label>
-								<div class="col-sm-2">
+								<label for="nome" class="col-sm-4 control-label">Telefone</label>
+								<div class="col-sm-4">
 									<input type="text" class="form-control" id="telefoneClienteSec"
 										name="telefoneClienteSec">
 								</div>
 							</div>
 							
 							<div id="divCpf" class="form-group">
-								<label for="nome" class="col-sm-5 control-label">CPF</label>
-								<div class="col-sm-2">
+								<label for="nome" class="col-sm-4 control-label">CPF</label>
+								<div class="col-sm-4">
 									<input type="text" class="form-control" id="cpfClienteSec"
 										name="cpfClienteSec">
 								</div>
 							</div>
 							
 							<div id="divRg" class="form-group">
-								<label for="nome" class="col-sm-5 control-label">RG</label>
-								<div class="col-sm-2">
+								<label for="nome" class="col-sm-4 control-label">RG</label>
+								<div class="col-sm-4">
 									<input type="text" class="form-control" id="rgClienteSec"
 										name="rgClienteSec">
 								</div>
 							</div>
 							
+							<div class="form-group">
+							<label class="col-sm-4 control-label">Endereço</label>
+							<div class="col-sm-4">
+								<select name="pEnderecoSec" id="enderecoSec"
+									class="form-control select2 select2-hidden-accessible"
+									style="width: 100%;" tabindex="-1" aria-hidden="true">
+									<option value="0" selected></option>
+									<c:forEach items="${enderecos }" var="endereco">
+										<option value="${endereco.idEndereco}">${endereco.idEndereco} - ${endereco.rua}</option>
+									</c:forEach>
+								</select>
+							</div>
 						</div>
 						
-						
-						
+						<div class="form-group">
+							<label class="col-sm-4 control-label"></label>
+							<div style="text-align:center;" class="col-sm-2">
+								<span class="input-group-btn">
+                    				<a style="width:100%" href="#"
+						             data-toggle="modal" data-target=".modal2"
+                    				 title="Adicionar endereço" class="btn btn-primary btn-flat">
+                    				<i class="fa fa-plus-circle"></i>
+                    				</a>
+	                  			</span>
+							</div>
+							<div style="text-align:center;" class="col-sm-2">
+								<span class="input-group-btn">
+                    				<a href="#"
+                    				 style="width:100%"
+                    				 title="Alterar endereço" class="btn btn-primary btn-flat">
+                    				<i class="fa fa-edit"></i>
+                    				</a>
+	                  			</span>
+							</div>
+							
+						</div>
+							
+						</div>
+							
 					</div>
 					
 					
 					<div align="center" class="box-footer">					
 						
-							<input onclick="run_waitMe();"  class="btn btn-primary btn-md" type = "submit" name="save" value="Cadastrar"/>
+							<input onclick="run_waitMe();"  class="btn btn-primary btn-md" type = "submit" value="Cadastrar"/>
 							
 							<input onclick="run_waitMe();" id="addClienteSec"  class="btn btn-primary btn-md" type="button" value="Cliente secundário"/>
 							
@@ -238,5 +260,7 @@
 		</section>
 	</div>
 
+<%@ include file="/WEB-INF/views/clientes/modalNovoEndereco.jsp" %>
+<%@ include file="/WEB-INF/views/clientes/modalNovoEnderecoSec.jsp" %>
 
 </tags:pageTemplate>

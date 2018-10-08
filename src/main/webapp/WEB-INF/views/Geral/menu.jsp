@@ -32,7 +32,7 @@
 
 		<ul class="sidebar-menu tree" data-widget="tree">
 			<li class="treeview"><a href="#"><i class="fa fa-group"></i>
-					<span>Clientes</span> <span class="pull-right-container"> <i
+					<span>Cliente</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
@@ -42,16 +42,32 @@
 							class="fa fa-plus-circle"></i> Novo</a></li>
 				</ul></li>
 			<li class="treeview"><a href="#"><i
-					class="fa fa-folder-open"></i> <span>Projetos</span> <span
-					class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
+					class="fa fa-folder-open"></i> <span>Projeto</span> 
+					<span class="pull-right-container"> 
+					<i class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
 					<li><a onclick="run_waitMe(null, 1);" href="#"><i class="fa fa-search"></i> Consultar</a></li>
 					<li><a onclick="run_waitMe(null, 1);" href="${contextPath}projetos/novo"><i class="fa fa-plus-circle"></i> Novo</a></li>
+					<li class="treeview"><a href="#"><i class="fa fa-tags"></i> Categoria<span class="pull-right-container">
+	                  		<i class="fa fa-angle-left pull-right"></i>
+	                	</span></a>
+						<ul class="treeview-menu">
+							<li><a onclick="run_waitMe(null, 1);" href="${contextPath}categorias/consulta"><i class="fa fa-search"></i> Consultar</a></li>
+							<li><a onclick="run_waitMe(null, 1);" href="${contextPath}categorias/novo"><i class="fa fa-plus-circle"></i> Novo</a></li>
+						</ul>
+					</li>
+					<li class="treeview"><a href="#"><i class="fa fa-tags"></i> Tipo Projeto<span class="pull-right-container">
+	                  		<i class="fa fa-angle-left pull-right"></i>
+	                	</span></a>
+						<ul class="treeview-menu">
+							<li><a onclick="run_waitMe(null, 1);" href="${contextPath}tipos/consulta"><i class="fa fa-search"></i> Consultar</a></li>
+							<li><a onclick="run_waitMe(null, 1);" href="${contextPath}tipos/novo"><i class="fa fa-plus-circle"></i> Novo</a></li>
+						</ul>
+					</li>
 				</ul></li>
 			<li class="treeview"><a href="#"><i class="fa fa-users"></i>
-					<span>Usuários</span> <span class="pull-right-container"> <i
+					<span>Usuário</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">

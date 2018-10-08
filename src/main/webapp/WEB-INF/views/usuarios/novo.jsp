@@ -14,7 +14,7 @@
       </h1>
       <ol class="breadcrumb">
         <li>Home</li>
-        <li>Usuários</li>
+        <li>Usuário</li>
         <li class="active">Novo Usuário</li>
       </ol>
     </section>
@@ -44,36 +44,36 @@
               <div class="box-body">
               	
               	<div class="form-group">
-                  <label for="nome" class="col-sm-5 control-label">Nome*</label>
-                  <div class="col-sm-2">
+                  <label for="nome" class="col-sm-4 control-label">Nome*</label>
+                  <div class="col-sm-4">
                     <input type="text" class="form-control" name="nome" id="nome" required>
                   </div>
                 </div>
               	
                 <div class="form-group">
-                  <label for="nome" class="col-sm-5 control-label">Email*</label>
-                  <div class="col-sm-2">
+                  <label for="nome" class="col-sm-4 control-label">Email*</label>
+                  <div class="col-sm-4">
                     <input type="email" class="form-control" name="email" id="email" required>
                   </div>
                 </div>
                 
                 <div class="form-group">
-                  <label for="nome" class="col-sm-5 control-label">Senha*</label>
-                  <div class="col-sm-2">
+                  <label for="nome" class="col-sm-4 control-label">Senha*</label>
+                  <div class="col-sm-4">
                     <input type="password" class="form-control" name="senha" id="senha" required>
                   </div>
                 </div>
                 
                 <div class="form-group">
-                  <label for="nome" class="col-sm-5 control-label">Confirme a senha*</label>
-                  <div class="col-sm-2">
+                  <label for="nome" class="col-sm-4 control-label">Confirme a senha*</label>
+                  <div class="col-sm-4">
                     <input type="password" class="form-control" name="senhaConfirm" id="senhaConfirm" required>
                   </div>
                 </div>
               
               <div class="form-group">
-                <label class="col-sm-5 control-label">Permissão*</label>
-                <div class="col-sm-2">
+                <label class="col-sm-4 control-label">Permissão*</label>
+                <div class="col-sm-4">
                 <select name="permissao" class="form-control select2 select2-hidden-accessible " style="width: 100%;" tabindex="-1" aria-hidden="true" required>
                   <c:forEach items="${permissoes }" var="permissao">
                   	<option value="${permissao}">${permissao}</option>

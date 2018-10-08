@@ -7,10 +7,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -26,6 +28,7 @@ public class Cliente {
 	private String cpf;
 	private String cnpj;
 	private String rg;
+	private Boolean secundario;
 	
 	@OneToOne
 	@JoinColumn(name = "idClienteSec", nullable = true)
@@ -40,12 +43,32 @@ public class Cliente {
 	           orphanRemoval = true)
 	private List<Projeto> projetos = new ArrayList<>();
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEndereco")
+	private Endereco endereco;
+	
 	public void addProjeto(Projeto projeto) {
 		projetos.add(projeto);
 		projeto.setCliente(this);
     }
 	
-    public Cliente getClienteSec() {
+    public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public Boolean getSecundario() {
+		return secundario;
+	}
+
+	public void setSecundario(Boolean secundario) {
+		this.secundario = secundario;
+	}
+
+	public Cliente getClienteSec() {
 		return ClienteSec;
 	}
 
@@ -129,5 +152,19 @@ public class Cliente {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+
+	@Override
+	public boolean equals(Object pObject) {
+		if(this == pObject) return true;
+		if(!(pObject instanceof Cliente)) return false;
+		return idCliente != null && idCliente.equals(((Cliente) pObject).idCliente);
+	}
+	@Override
+    public int hashCode() {
+        return 31;
+    }
+	
+	
+	
 
 }

@@ -12,7 +12,7 @@
 			</h1>
 			<ol class="breadcrumb">
 				<li>Home</li>
-				<li>Projetos</li>
+				<li>Projeto</li>
 				<li class="active">Novo Projeto</li>
 			</ol>
 		</section>
@@ -25,33 +25,105 @@
 				</div>
 		
 		
-			
-				<div class="box-body">
-					<form:form id="novoProjeto" action="#" method="POST">
-						
-						<!-- Linha 1 -->
-							<div class="row">
-							
-								<div class="col-md-6">
-				                	<label>Cliente*</label>
-				                	<select name="cliente" class="form-control select2 select2-hidden-accessible " style="width: 100%;" tabindex="-1" aria-hidden="true" required>
-					                  <c:forEach items="${clientes }" var="cliente">
-					                  	<option value="${cliente.idCliente}">${cliente.nome1} (${cliente.cpf1 })</option>
-					                  </c:forEach>
-					                </select>
-					             
-			                	</div>
-								
+				<form:form id="novoProjeto" class="form-horizontal" action="#" method="POST">
+					<div class="box-body">
+					
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Cliente*</label>
+							<div class="col-sm-4">
+								<select name="cliente" id="cliente"
+									class="form-control select2 select2-hidden-accessible"
+									style="width: 100%;" tabindex="-1" aria-hidden="true" required>
+									<c:forEach items="${clientes }" var="cliente">
+										<c:if test="${!cliente.secundario }">
+											<option value="${cliente.idCliente}">${cliente.idCliente} - ${cliente.nome}</option>
+										</c:if>
+									</c:forEach>
+								</select>
 							</div>
-							
-							
-			                
-			                
+						</div>
 						
-					</form:form>
-				</div>
-		
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Tipo*</label>
+							<div class="col-sm-3">
+								<select name="tipoProjeto" id="tipoProjeto" multiple
+									class="form-control select2 select2-hidden-accessible"
+									style="width: 100%;" tabindex="-1" aria-hidden="true" required>
+									<c:forEach items="${tipos }" var="tipo">
+										<option value="${tipo.idTipoProjeto}">${tipo.descricao}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="col-sm-1">
+                    			<span class="input-group-btn">
+                    				<a href="#" style="width:100%;"
+						             data-toggle="modal" data-target=".modal4"
+                    				 title="Adicionar tipo de projeto" class="btn btn-primary btn-flat">
+                    				<i class="fa fa-plus-circle"></i>
+                    				</a>
+	                  			</span>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Categoria*</label>
+							<div class="col-sm-3">
+								<select name="categoria" id="categoria"
+									class="form-control select2 select2-hidden-accessible"
+									style="width: 100%;" tabindex="-1" aria-hidden="true" required>
+									<c:forEach items="${categorias }" var="categoria">
+										<option value="${categoria.idCategoria}">${categoria.descricao}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="col-sm-1">
+                    			<span class="input-group-btn">
+                    				<a href="#" style="width:100%;"
+						             data-toggle="modal" data-target=".modal3"
+                    				 title="Adicionar categoria" class="btn btn-primary btn-flat">
+                    				<i class="fa fa-plus-circle"></i>
+                    				</a>
+	                  			</span>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Medidas do terreno (metros)*</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="medidaTerreno1" id="medidaTerreno1"
+									required>
+							</div>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="medidaTerreno2" id="medidaTerreno2"
+									required>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Medida da construção (metros quadrados)*</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="medidaConstrucao" id="medidaConstrucao"
+									required>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Obervações</label>
+							<div class="col-sm-4">
+								<textarea style="resize:vertical;" class="form-control" name="observacao" id="observacao"></textarea>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div align="center" class="box-footer">
+						<button onclick="run_waitMe(this.form, 2);" type="submit"
+							class="btn btn-primary btn-md">Cadastrar</button>
+					</div>
+			</form:form>
 			</div>
 		</section>
 	</div>
+	<%@ include file="/WEB-INF/views/projetos/modalNovoTipo.jsp" %>
+	<%@ include file="/WEB-INF/views/projetos/modalNovaCategoria.jsp" %>
 </tags:pageTemplate>

@@ -24,6 +24,7 @@
 		<link rel="stylesheet" href="${contextPath}resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/bower_components/morris.js/morris.css">
 		<link rel="stylesheet" href="${contextPath}resources/bower_components/select2/dist/css/select2.min.css">
+		<link rel="stylesheet" href="${contextPath }resources/plugins/pace/pace.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/dist/css/AdminLTE.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/dist/css/skins/skin-pink.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/myStyles/waitMe.min.css">
@@ -61,10 +62,14 @@
 		<script src="${contextPath}resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 		<script src="${contextPath}resources/plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="${contextPath}resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+		<script src="${contextPath}resources/plugins/pace/pace.min.js"></script>
 		<script src="${contextPath}resources/dist/js/adminlte.min.js"></script>
 		<script src="${contextPath}resources/dist/js/demo.js"></script>
 		<script src="${contextPath}resources/myScripts/usuarios.js"></script>
 		<script src="${contextPath}resources/myScripts/clientes.js"></script>
+		<script src="${contextPath}resources/myScripts/endereco.js"></script>
+		<script src="${contextPath}resources/myScripts/categorias.js"></script>
+		<script src="${contextPath}resources/myScripts/tiposprojeto.js"></script>
 		<script src="${contextPath}resources/myScripts/waitMe.min.js"></script>
 		<script>
 			//Retira mensagens do HTML5
@@ -80,7 +85,6 @@
 				 	if(pType == 2 && pForm != null && $(pForm).valid()){
 				 		$('#container').waitMe({
 							effect : 'roundBounce',
-							text : 'Por favor aguarde...',
 							bg : 'rgba(255,255,255,0.85)',
 							color : '#000',
 							maxSize : '',
@@ -93,7 +97,6 @@
 				 	} else if (pType == 1 && pForm == null){
 				 		$('#container').waitMe({
 							effect : 'roundBounce',
-							text : 'Por favor aguarde...',
 							bg : 'rgba(255,255,255,0.85)',
 							color : '#000',
 							maxSize : '',
@@ -104,11 +107,36 @@
 							onClose : function() {}
 						})
 				 	}
-				}
+			}
 			
 			$(function () {
 				$('.select2').select2();
 			})
+			
+			$(document).ajaxStart(function() { Pace.restart(); });
+			
+			$(function () {
+			    setNavigation();
+			});
+
+			function setNavigation() {
+			    var path = window.location.pathname;
+			    path = path.replace(/\/$/, "");
+			    path = decodeURIComponent(path);
+
+			    $(".treeview a").each(function () {
+			        var href = $(this).attr('href');
+			        if (path.substring(0, href.length) === href) {
+			            $(this).closest('li').addClass('active');
+			            $(this).parents('ul').css('display', 'block');
+			            $(this).parents('li').addClass('menu-open');
+			        }
+			    });
+			}
+			
+			$('#generalTable').DataTable( {
+			    responsive: true
+			} );
 			
 		</script>
 	</body>
