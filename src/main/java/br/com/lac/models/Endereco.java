@@ -15,8 +15,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Endereco {
 	
-	//private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEndereco;
@@ -39,6 +37,11 @@ public class Endereco {
 	           mappedBy="endereco")
 	private List<Cliente> clientes = new ArrayList<>();
 	
+	@OneToMany(cascade = CascadeType.ALL,
+	           orphanRemoval = true,
+	           mappedBy="endereco")
+	private List<Projeto> projetos = new ArrayList<>();
+	
 	public void addCliente(Cliente pCliente) {
 		clientes.add(pCliente);
 		pCliente.setEndereco(this);
@@ -47,6 +50,16 @@ public class Endereco {
 	public void removeCliente(Cliente pCliente) {
 		clientes.remove(pCliente);
 		pCliente.setEndereco(null);
+	}
+	
+	public void addProjeto(Projeto pProjeto) {
+		projetos.add(pProjeto);
+		pProjeto.setEndereco(this);
+    }
+	
+	public void removeProjeto(Projeto pProjeto) {
+		projetos.remove(pProjeto);
+		pProjeto.setEndereco(null);
 	}
 	
 	public List<Cliente> getClientes() {

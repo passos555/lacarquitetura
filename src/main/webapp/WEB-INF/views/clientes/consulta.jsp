@@ -52,7 +52,7 @@
 							<h3 class="box-title">Clientes cadastrados no sistema</h3>
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body">
+						<div class="box-body table-responsive">
 							<table id="generalTable" class="table table-bordered table-hover">
 								<thead>
 									<tr>

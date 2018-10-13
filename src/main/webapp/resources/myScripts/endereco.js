@@ -63,6 +63,39 @@ $('#modal-novoEndereco').on('hidden.bs.modal', function () {
 });
 
 
+//ALTERAÇÂO DE ENDEREÇO
+$("#altEndereco").on("click", function () {
+	
+	var idEndereco = $("#endereco").val();
+	
+	var endereco = {
+		"idEndereco": idEndereco
+	};
+	
+	if(idEndereco > 0){
+		$.ajax({ 
+		    url:"/lac/enderecos/getJson",    
+		    type:"POST", 
+		    contentType: "application/json; charset=utf-8",
+		    data: JSON.stringify(endereco),
+		    dataType: 'json',
+		    success: function(response){
+		    	$('#modal-novoEndereco').modal('toggle');
+		    	$(".modal-body #idEndereco").val( response.idEndereco );
+		    	$(".modal-body #cep").val( response.cep );
+		    	$(".modal-body #rua").val( response.rua );
+		    	$(".modal-body #bairro").val( response.bairro );
+		    	$(".modal-body #cidade").val( response.cidade );
+		    	$(".modal-body #complemento").val( response.complemento );
+		    },
+			error: function(jqXHR, textStatus, ex) {
+				console.log(textStatus + "," + ex + "," + jqXHR.responseText);
+			}
+		});
+	}
+});
+
+
 //ENDEREÇO SECUNDARIO
 
 $("#addEnderecoSec").on("click", function () {

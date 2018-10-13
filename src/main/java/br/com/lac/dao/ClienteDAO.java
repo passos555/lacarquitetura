@@ -25,6 +25,10 @@ public class ClienteDAO {
 		return manager.createQuery("select c from Cliente c", Cliente.class).getResultList();
 	}
 	
+	public Cliente getById(Long pId) {
+		return manager.createQuery("select c from Cliente c where c.idCliente = :id", Cliente.class)
+				.setParameter("id", pId).getSingleResult();
+	}
 	
 	public boolean findClientByCpf(Cliente pCliente) {
 

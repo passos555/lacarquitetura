@@ -25,6 +25,10 @@ public class TipoProjetoDAO {
 		return manager.createQuery("select tp from TipoProjeto tp", TipoProjeto.class).getResultList();
 	}
 	
+	public TipoProjeto getById(Long pId) {
+		return manager.createQuery("select tp from TipoProjeto tp where tp.idTipoProjeto = :id", TipoProjeto.class)
+				.setParameter("id", pId).getSingleResult();
+	}
 	
 	public boolean alterProjectType(TipoProjeto pTipoProjeto) {
 		

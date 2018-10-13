@@ -135,7 +135,7 @@
 							</div>
 							<div style="text-align:center;" class="col-sm-2">
 								<span class="input-group-btn">
-                    				<a href="#" style="width:100%"
+                    				<a href="#" id="altEndereco" style="width:100%"
                     				 title="Alterar endereço" class="btn btn-primary btn-flat">
                     				<i class="fa fa-edit"></i>
                     				</a>

@@ -39,12 +39,14 @@ import br.com.lac.controllers.HomeController;
 import br.com.lac.dao.CategoriaDAO;
 import br.com.lac.dao.ClienteDAO;
 import br.com.lac.dao.EnderecoDAO;
+import br.com.lac.dao.ProjetoDAO;
+import br.com.lac.dao.ProjetoXTipoDAO;
+import br.com.lac.dao.TipoProjetoDAO;
 import br.com.lac.dao.UsuarioDAO;
-import br.com.lac.models.TipoProjeto;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses = { HomeController.class, UsuarioDAO.class, ClienteDAO.class, EnderecoDAO.class,
-		CategoriaDAO.class, TipoProjeto.class})
+		CategoriaDAO.class, TipoProjetoDAO.class, ProjetoDAO.class, ProjetoXTipoDAO.class})
 @EnableCaching
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 

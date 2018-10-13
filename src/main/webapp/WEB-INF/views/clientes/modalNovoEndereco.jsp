@@ -13,7 +13,7 @@
 					<div class="modal-body">
 						<div class="box-body">
 						 <form:form id="novoEndereco" action="#" method="POST">
-							
+							<input type="hidden" id="idEndereco" />
 							<div class="row">
 								<div class="col-md-3">
 									<label>CEP</label>

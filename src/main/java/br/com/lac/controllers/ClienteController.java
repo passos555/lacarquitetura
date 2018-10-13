@@ -74,8 +74,8 @@ public class ClienteController {
 		if(!pEndereco.replace(",",  "").equals("0")) {
 			Long lIdEndereco = Long.parseLong(pEndereco.replace(",", ""));
 			lEndereco = enderecoDao.getById(lIdEndereco);
-			lEndereco.addCliente(pCliente);
 			clienteDao.saveClient(pCliente);
+			lEndereco.addCliente(pCliente);
 			enderecoDao.saveEndereco(lEndereco);
 		}
 		
@@ -113,6 +113,7 @@ public class ClienteController {
 				enderecoDao.saveEndereco(lEnderecoSec);
 			}
 		}
+		
 		
 		redirectAttributes.addFlashAttribute("sucesso", "Cliente cadastrado com sucesso!");
 		return model;

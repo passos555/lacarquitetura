@@ -25,6 +25,11 @@ public class CategoriaDAO {
 		return manager.createQuery("select c from Categoria c", Categoria.class).getResultList();
 	}
 	
+	public Categoria getById(Long pId) {
+		return manager.createQuery("select c from Categoria c where c.idCategoria = :id", Categoria.class)
+				.setParameter("id", pId).getSingleResult();
+	}
+	
 	public boolean alterCategory(Categoria pCategoria) {
 		
 		boolean lResult = false;

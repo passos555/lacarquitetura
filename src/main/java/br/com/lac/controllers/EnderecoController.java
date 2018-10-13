@@ -25,4 +25,12 @@ public class EnderecoController {
 		return pEnderecoJson;
 	}
 	
+	@RequestMapping(value = "/enderecos/getJson" , method = RequestMethod.POST)
+	public @ResponseBody Endereco getJson(@RequestBody Endereco pEnderecoJson) {
+		
+		return enderecoDao.getById(pEnderecoJson.getIdEndereco());
+	}
+	
+	
+	
 }

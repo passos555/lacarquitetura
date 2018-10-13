@@ -29,6 +29,18 @@ public class Projeto {
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEndereco")
+	private Endereco endereco;
+	
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 	
 	public Categoria getCategoria() {
 		return categoria;

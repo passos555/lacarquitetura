@@ -40,7 +40,8 @@ public class Cliente {
 	private Status status;
 	
 	@OneToMany(cascade = CascadeType.ALL,
-	           orphanRemoval = true)
+	           orphanRemoval = true,
+	           mappedBy="cliente")
 	private List<Projeto> projetos = new ArrayList<>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
