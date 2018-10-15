@@ -24,26 +24,7 @@
 						todos os campos obrigatórios!</h3>
 				</div>
 
-				<c:if test="${not empty sucesso }">
-					<div class="alert alert-success alert-dismissible">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">x</button>
-						<h4>
-							<i class="icon fa fa-check"></i> Sucesso!
-						</h4>
-						${sucesso }
-					</div>
-				</c:if>
-				<c:if test="${not empty erro }">
-					<div class="alert alert-danger alert-dismissible">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">x</button>
-						<h4>
-							<i class="icon fa fa-check"></i> Erro!
-						</h4>
-						${erro }
-					</div>
-				</c:if>
+				<%@ include file="/WEB-INF/views/Geral/mensagens.jsp"%>
 
 				<form:form class="form-horizontal" id="novoCliente" action="${s:mvcUrl('TPC#saveProjectType').build() }" method="POST">
 					<div class="box-body">

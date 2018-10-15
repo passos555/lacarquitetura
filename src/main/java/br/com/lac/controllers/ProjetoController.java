@@ -1,7 +1,14 @@
 package br.com.lac.controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +27,7 @@ import br.com.lac.models.Endereco;
 import br.com.lac.models.Estado;
 import br.com.lac.models.Projeto;
 import br.com.lac.models.ProjetoXTipo;
+import br.com.lac.models.StatusProjeto;
 import br.com.lac.models.TipoProjeto;
 
 @Controller
@@ -57,7 +65,18 @@ public class ProjetoController {
 		return model;
 	}
 	
+	@Cacheable(value = "projetoList")
+	@RequestMapping("/projetos/consulta")
+	public ModelAndView list() {
+		
+		ModelAndView model = new ModelAndView();
+		model.addObject("projetos", projetoDao.list());
+		
+		return model;
+	}
+	
 	//Adiciona novo projeto
+	@CacheEvict(value = "projetoList", allEntries = true)
 	@RequestMapping(value = "/projetos/novo", method = RequestMethod.POST)
 	public ModelAndView save(Projeto pProjeto,
 							 @RequestParam String pEndereco,
@@ -68,6 +87,8 @@ public class ProjetoController {
 		
 		ModelAndView model = new ModelAndView("redirect:/projetos/novo");
 		
+		DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar cal = Calendar.getInstance();
 		Endereco lEndereco = null;
 		Categoria lCategoria = null;
 		TipoProjeto lTipoProjeto = null;
@@ -111,8 +132,22 @@ public class ProjetoController {
 			enderecoDao.saveEndereco(lEndereco);
 		}
 		
+		pProjeto.setDataCadastro(sdf.format(cal.getTime()));
+		pProjeto.setStatus(StatusProjeto.Andamento);
 		projetoDao.saveProject(pProjeto);
 		redirectAttributes.addFlashAttribute("sucesso", "Projeto cadastrado com sucesso!");
+		
+		return model;
+	}
+	
+	
+	@RequestMapping("/projetos/detalhe/{id}")
+	public ModelAndView details(@PathVariable("id") Long pId) {
+		
+		ModelAndView model = new ModelAndView("projetos/detalhe");
+		Projeto lProjeto = projetoDao.getById(pId);
+		model.addObject("projeto", lProjeto);
+		model.addObject("status", StatusProjeto.values());
 		
 		return model;
 	}

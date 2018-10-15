@@ -20,6 +20,8 @@ public class Projeto {
 	private Long medidaTerreno2;
 	private Long medidaConstrucao;
 	private String observacao;
+	private String dataCadastro;
+	private StatusProjeto status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCliente")
@@ -33,7 +35,22 @@ public class Projeto {
     @JoinColumn(name = "idEndereco")
 	private Endereco endereco;
 	
-	
+	public StatusProjeto getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusProjeto status) {
+		this.status = status;
+	}
+
+	public String getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(String dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	public Endereco getEndereco() {
 		return endereco;
 	}

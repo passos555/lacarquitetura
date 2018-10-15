@@ -47,7 +47,7 @@
 					<i class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
-					<li><a onclick="run_waitMe(null, 1);" href="#"><i class="fa fa-search"></i> Consultar</a></li>
+					<li><a onclick="run_waitMe(null, 1);" href="${contextPath}projetos/consulta"><i class="fa fa-search"></i> Consultar</a></li>
 					<li><a onclick="run_waitMe(null, 1);" href="${contextPath}projetos/novo"><i class="fa fa-plus-circle"></i> Novo</a></li>
 					<li class="treeview"><a href="#"><i class="fa fa-tags"></i> Categoria<span class="pull-right-container">
 	                  		<i class="fa fa-angle-left pull-right"></i>

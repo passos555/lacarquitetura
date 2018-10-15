@@ -24,27 +24,7 @@
 						todos os campos obrigatórios!</h3>
 				</div>
 
-				<c:if test="${not empty sucesso }">
-					<div class="alert alert-success alert-dismissible">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">×</button>
-						<h4>
-							<i class="icon fa fa-check"></i> Sucesso!
-						</h4>
-						${sucesso }
-					</div>
-				</c:if>
-				<c:if test="${not empty erro }">
-					<div class="alert alert-danger alert-dismissible">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">×</button>
-						<h4>
-							<i class="icon fa fa-check"></i> Erro!
-						</h4>
-						${erro }
-					</div>
-				</c:if>
-
+				<%@ include file="/WEB-INF/views/Geral/mensagens.jsp"%>
 
 				<form:form id="novoProjeto" class="form-horizontal" action="${s:mvcUrl('PC#save').build() }"
 					method="POST">
@@ -180,6 +160,7 @@
 							<button onclick="run_waitMe(this.form, 2);" type="submit"
 								class="btn btn-primary btn-md">Cadastrar</button>
 						</div>
+					</div>
 				</form:form>
 			</div>
 		</section>

@@ -12,20 +12,7 @@
 	        <small>Usu&aacute;rios Cadastrados</small>
 	      </h1>
 	      
-	      <c:if test="${not empty sucesso }">
-        <div class="alert alert-success alert-dismissible" style="margin-bottom:0px;">
-        	<button type="button" data-dismiss="alert" class="close" aria-hidden="true">x</button>
-         	<h4><i class="icon fa fa-check"></i> Sucesso!</h4>
-	  	 	${sucesso }
-          </div>
-        </c:if>
-        <c:if test="${not empty erro }">
-        <div class="alert alert-danger alert-dismissible" style="margin-bottom:0px;">
-        	<button type="button" data-dismiss="alert" class="close" aria-hidden="true">x</button>
-         	<h4><i class="icon fa fa-check"></i> Erro!</h4>
-	  	 	${erro }
-          </div>
-       </c:if>    	
+	      <%@ include file="/WEB-INF/views/Geral/mensagens.jsp"%>
 	   
 	   <div id="erro" style="display:none;" class="alert alert-danger alert-dismissible">
          <button id="hideDiv" type="button" class="close" aria-hidden="true">x</button>
@@ -72,7 +59,7 @@
 	                   		<td><span id="status_${usuario.idUsuario }" class="label label-success">${usuario.status }</span></td>
 	                   		<td align="center">
 		                  	<a href="#" onClick="change(${usuario.idUsuario})"><i id="icon_${usuario.idUsuario }" class="fa fa-remove"></i></a>
-	                  </td>
+	                  		</td>
 	                   </c:when>
 	                   <c:otherwise>
 	                   		<td><span id="status_${usuario.idUsuario }" class="label label-danger">${usuario.status }</span></td>

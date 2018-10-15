@@ -1,5 +1,7 @@
 package br.com.lac.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,5 +19,15 @@ public class ProjetoDAO {
 	
 	public void saveProject(Projeto pProjeto) {
 		manager.persist(pProjeto);
+	}
+
+	public List<Projeto> list() {
+		return manager.createQuery("select p from Projeto p", Projeto.class).getResultList();
+	}
+	
+	public Projeto getById(Long pId) {
+		return manager.createQuery("select p from Projeto p where p.idProjeto = :id", Projeto.class)
+				.setParameter("id", pId)
+				.getSingleResult();
 	}
 }
