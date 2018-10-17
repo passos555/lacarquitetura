@@ -2,7 +2,9 @@ package br.com.lac.controllers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -15,16 +17,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.lac.dao.AnteProjetoDAO;
 import br.com.lac.dao.CategoriaDAO;
 import br.com.lac.dao.ClienteDAO;
 import br.com.lac.dao.EnderecoDAO;
+import br.com.lac.dao.FaseDAO;
 import br.com.lac.dao.ProjetoDAO;
 import br.com.lac.dao.ProjetoXTipoDAO;
 import br.com.lac.dao.TipoProjetoDAO;
+import br.com.lac.models.AnteProjeto;
 import br.com.lac.models.Categoria;
 import br.com.lac.models.Cliente;
 import br.com.lac.models.Endereco;
 import br.com.lac.models.Estado;
+import br.com.lac.models.Fase;
 import br.com.lac.models.Projeto;
 import br.com.lac.models.ProjetoXTipo;
 import br.com.lac.models.StatusProjeto;
@@ -50,6 +56,12 @@ public class ProjetoController {
 	
 	@Autowired
 	private ProjetoXTipoDAO projetoXtipoDao;
+	
+	@Autowired
+	private AnteProjetoDAO anteProjetoDao;
+	
+	@Autowired
+	private FaseDAO faseDao;
 	
 	//Abre view de cadastro
 	@RequestMapping("/projetos/novo")
@@ -95,6 +107,7 @@ public class ProjetoController {
 		Cliente lCliente = null;
 		String[] lTipos = pTipoProjeto.split(",");
 		
+		
 		if(!pCategoria.replace(",", "").equals("0")) {
 			Long lIdCategoria = Long.parseLong(pCategoria.replace(",", ""));
 			lCategoria = categoriaDao.getById(lIdCategoria);
@@ -102,6 +115,7 @@ public class ProjetoController {
 		}
 		
 		projetoDao.saveProject(pProjeto);
+		newAnteProjeto(pProjeto);
 		
 		if(!pCliente.replace(",", "").equals("0")) {
 			Long lIdCliente = Long.parseLong(pCliente.replace(",", ""));
@@ -140,16 +154,39 @@ public class ProjetoController {
 		return model;
 	}
 	
-	
+	//Abre pagina de detalhes do projeto
 	@RequestMapping("/projetos/detalhe/{id}")
 	public ModelAndView details(@PathVariable("id") Long pId) {
 		
 		ModelAndView model = new ModelAndView("projetos/detalhe");
 		Projeto lProjeto = projetoDao.getById(pId);
+		AnteProjeto lAnteProjeto = anteProjetoDao.getByProjectId(pId);
+		
 		model.addObject("projeto", lProjeto);
+		model.addObject("anteProjeto", lAnteProjeto);
 		model.addObject("status", StatusProjeto.values());
 		
 		return model;
+	}
+	
+	//Metodo que cria um novo anteProjeto com sua devias fases
+	private void newAnteProjeto(Projeto pProjeto) {
+		
+		AnteProjeto lAnteProjeto = new AnteProjeto();
+		lAnteProjeto.setProjeto(pProjeto);
+		anteProjetoDao.save(lAnteProjeto);
+		
+		Fase lContrato = new Fase("Contrato");
+		Fase lDocumento = new Fase("Documentos");
+		Fase lLevantamento = new Fase("Levantamento Planialtimátrico");
+		List<Fase> lFases = new ArrayList<>();
+		
+		lAnteProjeto.addFase(lContrato);
+		lAnteProjeto.addFase(lDocumento);
+		lAnteProjeto.addFase(lLevantamento);
+		
+		faseDao.saveFases(lFases);
+		//anteProjetoDao.save(lAnteProjeto);
 	}
 	
 }

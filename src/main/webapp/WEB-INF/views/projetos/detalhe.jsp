@@ -126,8 +126,8 @@
 					</div>
 				</div>
 			</div>
-			<%@ include file="/WEB-INF/views/projetos/preProjeto.jsp"%>
 			<%@ include file="/WEB-INF/views/projetos/anteProjeto.jsp"%>
+			<%@ include file="/WEB-INF/views/projetos/preProjeto.jsp"%>
 			
 		</section>
 		

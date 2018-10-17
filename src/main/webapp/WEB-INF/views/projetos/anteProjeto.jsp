@@ -15,9 +15,32 @@
 					</div>
 
 
-					<div class="box-body form-horizontal">
+					<div class="box-body form-horizontal table-responsive">
 
-						
+						<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th style="width:20px;"></th>
+										<th>Contrato</th>
+										<th>Documentos</th>
+										<th>Levantamento Planialtimátrico</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="font-weight: 600;">Prazo</td>
+									</tr>
+									<tr>
+										<td style="font-weight: 600;">Status</td>
+									</tr>
+									<tr>
+										<td style="font-weight: 600;">Último responsável</td>
+									</tr>
+									<tr>
+										<td style="font-weight: 600;">Data</td>
+									</tr>
+								</tbody>
+							</table>
 
 
 					</div>
