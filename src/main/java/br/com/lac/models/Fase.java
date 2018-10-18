@@ -26,6 +26,8 @@ public class Fase {
 	private AnteProjeto anteProjeto;
 	
 	
+	public Fase() {}
+	
 	public Fase(String pDescricao) {
 		this.descricao = pDescricao;
 	}

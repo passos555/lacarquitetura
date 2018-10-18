@@ -19,9 +19,9 @@ public class AnteProjetoDAO {
 		manager.persist(pAnteProjeto);
 	}
 	
-	public AnteProjeto getByProjectId(Long pIdProjeto) {
-		return manager.createQuery("select a from AnteProjeto a where a.idProjeto = :idProjeto", AnteProjeto.class)
-				.setParameter("idProjeto", pIdProjeto).getSingleResult();
+	public AnteProjeto getByProjectId(Long pId) {
+		return manager.createQuery("select a from AnteProjeto a where a.projeto.idProjeto = :id", AnteProjeto.class)
+				.setParameter("id", pId).getSingleResult();
 	}
 	
 }

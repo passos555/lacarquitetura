@@ -33,6 +33,7 @@ import br.com.lac.models.Estado;
 import br.com.lac.models.Fase;
 import br.com.lac.models.Projeto;
 import br.com.lac.models.ProjetoXTipo;
+import br.com.lac.models.StatusFaseProjeto;
 import br.com.lac.models.StatusProjeto;
 import br.com.lac.models.TipoProjeto;
 
@@ -161,10 +162,13 @@ public class ProjetoController {
 		ModelAndView model = new ModelAndView("projetos/detalhe");
 		Projeto lProjeto = projetoDao.getById(pId);
 		AnteProjeto lAnteProjeto = anteProjetoDao.getByProjectId(pId);
+		List<Fase> lFases = faseDao.getFasesByAnteProjeto(lAnteProjeto.getIdAnteProjeto());
 		
+		model.addObject("fases", lFases);
 		model.addObject("projeto", lProjeto);
 		model.addObject("anteProjeto", lAnteProjeto);
 		model.addObject("status", StatusProjeto.values());
+		model.addObject("statusFase", StatusFaseProjeto.values());
 		
 		return model;
 	}

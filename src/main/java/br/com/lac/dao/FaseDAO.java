@@ -22,4 +22,9 @@ public class FaseDAO {
 			manager.persist(fase);
 		}
 	}
+	
+	public List<Fase> getFasesByAnteProjeto(Long pId){
+		return manager.createQuery("select f from Fase f where f.anteProjeto.idAnteProjeto = :id", Fase.class)
+				.setParameter("id", pId).getResultList();
+	}
 }
