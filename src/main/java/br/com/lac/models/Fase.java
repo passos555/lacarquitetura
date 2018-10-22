@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Fase {
@@ -17,7 +18,6 @@ public class Fase {
 	
 	private String descricao;
 	private String prazo;
-	private String ultimoResponsavel;
 	private String dataAlteracao;
 	private StatusFaseProjeto status;
 	
@@ -25,11 +25,16 @@ public class Fase {
     @JoinColumn(name = "idAnteProjeto")
 	private AnteProjeto anteProjeto;
 	
+	@JoinColumn(name="idUsuario")
+	@OneToOne
+	private Usuario ultimoResponsavel;
+	
 	
 	public Fase() {}
 	
 	public Fase(String pDescricao) {
 		this.descricao = pDescricao;
+		this.status = StatusFaseProjeto.Andamento;
 	}
 	
 	public Long getIdFase() {
@@ -56,14 +61,14 @@ public class Fase {
 	public void setPrazo(String prazo) {
 		this.prazo = prazo;
 	}
-	public String getUltimoResponsavel() {
-		return ultimoResponsavel;
-	}
-	public void setUltimoResponsavel(String ultimoResponsavel) {
-		this.ultimoResponsavel = ultimoResponsavel;
-	}
 	public String getDataAlteracao() {
 		return dataAlteracao;
+	}
+	public Usuario getUltimoResponsavel() {
+		return ultimoResponsavel;
+	}
+	public void setUltimoResponsavel(Usuario ultimoResponsavel) {
+		this.ultimoResponsavel = ultimoResponsavel;
 	}
 	public void setDataAlteracao(String dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
@@ -74,7 +79,4 @@ public class Fase {
 	public void setStatus(StatusFaseProjeto status) {
 		this.status = status;
 	}
-	
-	
-	
 }

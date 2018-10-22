@@ -24,10 +24,12 @@
 		<link rel="stylesheet" href="${contextPath}resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/bower_components/morris.js/morris.css">
 		<link rel="stylesheet" href="${contextPath}resources/bower_components/select2/dist/css/select2.min.css">
+		<link rel="stylesheet" href="${contextPath}resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="${contextPath }resources/plugins/pace/pace.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/dist/css/AdminLTE.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/dist/css/skins/skin-pink.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/myStyles/waitMe.min.css">
+
 		<link rel="stylesheet"
 		      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	</head>
@@ -62,6 +64,7 @@
 		<script src="${contextPath}resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 		<script src="${contextPath}resources/plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="${contextPath}resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+		<script src="${contextPath}resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 		<script src="${contextPath}resources/plugins/pace/pace.min.js"></script>
 		<script src="${contextPath}resources/dist/js/adminlte.min.js"></script>
 		<script src="${contextPath}resources/dist/js/demo.js"></script>
@@ -70,6 +73,7 @@
 		<script src="${contextPath}resources/myScripts/endereco.js"></script>
 		<script src="${contextPath}resources/myScripts/categorias.js"></script>
 		<script src="${contextPath}resources/myScripts/tiposprojeto.js"></script>
+		<script src="${contextPath}resources/myScripts/anteprojeto.js"></script>
 		<script src="${contextPath}resources/myScripts/waitMe.min.js"></script>
 		<script>
 			//Retira mensagens do HTML5

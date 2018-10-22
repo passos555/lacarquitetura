@@ -9,11 +9,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,6 +28,7 @@ import br.com.lac.dao.FaseDAO;
 import br.com.lac.dao.ProjetoDAO;
 import br.com.lac.dao.ProjetoXTipoDAO;
 import br.com.lac.dao.TipoProjetoDAO;
+import br.com.lac.dao.UsuarioDAO;
 import br.com.lac.models.AnteProjeto;
 import br.com.lac.models.Categoria;
 import br.com.lac.models.Cliente;
@@ -36,6 +40,7 @@ import br.com.lac.models.ProjetoXTipo;
 import br.com.lac.models.StatusFaseProjeto;
 import br.com.lac.models.StatusProjeto;
 import br.com.lac.models.TipoProjeto;
+import br.com.lac.models.Usuario;
 
 @Controller
 public class ProjetoController {
@@ -63,6 +68,9 @@ public class ProjetoController {
 	
 	@Autowired
 	private FaseDAO faseDao;
+	
+	@Autowired
+	private UsuarioDAO usuarioDao;
 	
 	//Abre view de cadastro
 	@RequestMapping("/projetos/novo")
@@ -157,13 +165,14 @@ public class ProjetoController {
 	
 	//Abre pagina de detalhes do projeto
 	@RequestMapping("/projetos/detalhe/{id}")
-	public ModelAndView details(@PathVariable("id") Long pId) {
+	public ModelAndView details(@PathVariable("id") Long pId, Authentication pAuth) {
 		
 		ModelAndView model = new ModelAndView("projetos/detalhe");
 		Projeto lProjeto = projetoDao.getById(pId);
 		AnteProjeto lAnteProjeto = anteProjetoDao.getByProjectId(pId);
 		List<Fase> lFases = faseDao.getFasesByAnteProjeto(lAnteProjeto.getIdAnteProjeto());
 		
+		model.addObject("usuarioLogado", usuarioDao.findUsuarioByEmail(pAuth.getName()));
 		model.addObject("fases", lFases);
 		model.addObject("projeto", lProjeto);
 		model.addObject("anteProjeto", lAnteProjeto);
@@ -190,7 +199,28 @@ public class ProjetoController {
 		lAnteProjeto.addFase(lLevantamento);
 		
 		faseDao.saveFases(lFases);
-		//anteProjetoDao.save(lAnteProjeto);
+	}
+	
+	@RequestMapping(value = "/projetos/saveStatus" , method = RequestMethod.POST)
+	public @ResponseBody Fase saveStatus(@RequestBody Fase pFaseJson, Authentication pAuth) {
+		
+		if(pFaseJson != null) {
+			Usuario lUsuario = usuarioDao.findUsuarioByEmail(pAuth.getName());
+			faseDao.alterStatus(pFaseJson, lUsuario);
+		}
+			
+		return pFaseJson;
+	}
+	
+	@RequestMapping(value = "/projetos/savePrazo" , method = RequestMethod.POST)
+	public @ResponseBody Fase savePrazo(@RequestBody Fase pFaseJson, Authentication pAuth) {
+		
+		if(pFaseJson != null) {
+			Usuario lUsuario = usuarioDao.findUsuarioByEmail(pAuth.getName());
+			faseDao.alterPrazo(pFaseJson, lUsuario);
+		}
+			
+		return pFaseJson;
 	}
 	
 }
