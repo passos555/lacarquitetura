@@ -96,25 +96,21 @@
  $().ready(function() {
 		$("#alter").validate({
 			rules: {
+				nome: {
+					lettersonly: true
+				},
+				email:{
+					email: true
+				},
 				senha: {
 					required: false,
 					minlength: 5
-				},
-				email: {
-					required: true,
-					email: true
-				},
-				nome: {
-					required: true
 				}
 			},
 			messages: {
 				senha: {
-					required: "Informe uma senha!",
 					minlength: "Sua senha deve ter no minimo 5 caracteres"
-				},
-				nome:  "Informe o nome!",
-				email: "Informe um email valido!"
+				}
 			}
 		});
 	});
@@ -137,7 +133,8 @@
 					equalTo: "#senha"
 				},
 				nome: {
-					required: true
+					required: true,
+					lettersonly: true
 				},
 				email: {
 					required: true,

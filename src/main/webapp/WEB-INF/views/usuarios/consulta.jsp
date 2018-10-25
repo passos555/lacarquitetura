@@ -96,16 +96,16 @@
               <div class="box-body">
               	<input type="hidden" value="${usuario.idUsuario }" name="idUsuario" id="idUsuario">
                 <div class="form-group">
-                  <label for="nome" class="col-sm-4 control-label">Email*</label>
+                  <label for="nome" class="col-sm-4 control-label">Email</label>
                   <div class="col-sm-5">
-                    <input type="email" class="form-control" name="email" id="email" value="" required>
+                    <input type="email" class="form-control" name="email" id="email">
                   </div>
                 </div>
                 
                 <div class="form-group">
-                  <label for="nome" class="col-sm-4 control-label">Nome*</label>
+                  <label for="nome" class="col-sm-4 control-label">Nome</label>
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" name="nome" id="nome" value="" required>
+                    <input type="text" class="form-control" name="nome" id="nome">
                   </div>
                 </div>
                 

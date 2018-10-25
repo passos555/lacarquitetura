@@ -25,10 +25,17 @@ public class Fase {
     @JoinColumn(name = "idAnteProjeto")
 	private AnteProjeto anteProjeto;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idPreProjeto")
+	private PreProjeto preProjeto;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idProjetoFinal")
+	private ProjetoFinal projetoFinal;
+	
 	@JoinColumn(name="idUsuario")
 	@OneToOne
 	private Usuario ultimoResponsavel;
-	
 	
 	public Fase() {}
 	
@@ -36,7 +43,6 @@ public class Fase {
 		this.descricao = pDescricao;
 		this.status = StatusFaseProjeto.Andamento;
 	}
-	
 	public Long getIdFase() {
 		return idFase;
 	}
@@ -79,4 +85,18 @@ public class Fase {
 	public void setStatus(StatusFaseProjeto status) {
 		this.status = status;
 	}
+	public PreProjeto getPreProjeto() {
+		return preProjeto;
+	}
+	public void setPreProjeto(PreProjeto preProjeto) {
+		this.preProjeto = preProjeto;
+	}
+	public ProjetoFinal getProjetoFinal() {
+		return projetoFinal;
+	}
+	public void setProjetoFinal(ProjetoFinal projetoFinal) {
+		this.projetoFinal = projetoFinal;
+	}
+	
+	
 }

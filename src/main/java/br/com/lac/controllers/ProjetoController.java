@@ -25,7 +25,9 @@ import br.com.lac.dao.CategoriaDAO;
 import br.com.lac.dao.ClienteDAO;
 import br.com.lac.dao.EnderecoDAO;
 import br.com.lac.dao.FaseDAO;
+import br.com.lac.dao.PreProjetoDAO;
 import br.com.lac.dao.ProjetoDAO;
+import br.com.lac.dao.ProjetoFinalDAO;
 import br.com.lac.dao.ProjetoXTipoDAO;
 import br.com.lac.dao.TipoProjetoDAO;
 import br.com.lac.dao.UsuarioDAO;
@@ -35,7 +37,9 @@ import br.com.lac.models.Cliente;
 import br.com.lac.models.Endereco;
 import br.com.lac.models.Estado;
 import br.com.lac.models.Fase;
+import br.com.lac.models.PreProjeto;
 import br.com.lac.models.Projeto;
+import br.com.lac.models.ProjetoFinal;
 import br.com.lac.models.ProjetoXTipo;
 import br.com.lac.models.StatusFaseProjeto;
 import br.com.lac.models.StatusProjeto;
@@ -71,6 +75,12 @@ public class ProjetoController {
 	
 	@Autowired
 	private UsuarioDAO usuarioDao;
+	
+	@Autowired
+	private PreProjetoDAO preProjetoDao;
+	
+	@Autowired
+	private ProjetoFinalDAO projetoFinalDao;
 	
 	//Abre view de cadastro
 	@RequestMapping("/projetos/novo")
@@ -124,7 +134,9 @@ public class ProjetoController {
 		}
 		
 		projetoDao.saveProject(pProjeto);
+		newPreProjeto(pProjeto);
 		newAnteProjeto(pProjeto);
+		newProjetoFinal(pProjeto);
 		
 		if(!pCliente.replace(",", "").equals("0")) {
 			Long lIdCliente = Long.parseLong(pCliente.replace(",", ""));
@@ -170,12 +182,24 @@ public class ProjetoController {
 		ModelAndView model = new ModelAndView("projetos/detalhe");
 		Projeto lProjeto = projetoDao.getById(pId);
 		AnteProjeto lAnteProjeto = anteProjetoDao.getByProjectId(pId);
-		List<Fase> lFases = faseDao.getFasesByAnteProjeto(lAnteProjeto.getIdAnteProjeto());
+		PreProjeto lPreProjeto = preProjetoDao.getByProjectId(pId);
+		List<ProjetoFinal> lProjetoFinal = projetoFinalDao.getByProjectId(pId);
+		List<Fase> lFasesAnteProjeto = faseDao.getFasesByAnteProjeto(lAnteProjeto.getIdAnteProjeto());
+		List<Fase> lFasesPreProjeto = faseDao.getFasesByPreProjeto(lPreProjeto.getIdPreProjeto());
+		List<Fase> lFasesProjetoFinal1 = null;
+		List<Fase> lFasesProjetoFinal2 = null;
 		
+		if(lProjetoFinal.size() > 1) {
+			lFasesProjetoFinal1 = faseDao.getFasesByProjetoFinal(lProjetoFinal.get(0).getIdProjetoFinal());
+			lFasesProjetoFinal2 = faseDao.getFasesByProjetoFinal(lProjetoFinal.get(1).getIdProjetoFinal());
+		}
+			
 		model.addObject("usuarioLogado", usuarioDao.findUsuarioByEmail(pAuth.getName()));
-		model.addObject("fases", lFases);
+		model.addObject("fasesAnteProjeto", lFasesAnteProjeto);
 		model.addObject("projeto", lProjeto);
-		model.addObject("anteProjeto", lAnteProjeto);
+		model.addObject("fasesPreProjeto", lFasesPreProjeto);
+		model.addObject("fasesProjetoFinal1", lFasesProjetoFinal1);
+		model.addObject("fasesProjetoFinal2", lFasesProjetoFinal2);
 		model.addObject("status", StatusProjeto.values());
 		model.addObject("statusFase", StatusFaseProjeto.values());
 		
@@ -189,14 +213,86 @@ public class ProjetoController {
 		lAnteProjeto.setProjeto(pProjeto);
 		anteProjetoDao.save(lAnteProjeto);
 		
+		Fase lPlanta = new Fase("Planta humanizada");
+		Fase lModelo = new Fase("Modelo 3D");
+		Fase lRender = new Fase("Render");
+		Fase lAprovacaoCliente = new Fase("Aprovação do cliente");
+		Fase lAprovacaoPrefeitura = new Fase("Aprovação de prefeitura");
+		Fase lAprovacaoCondominio = new Fase("Aprovação do condomínio");
+		List<Fase> lFases = new ArrayList<>();
+		
+		lAnteProjeto.addFase(lPlanta);
+		lAnteProjeto.addFase(lModelo);
+		lAnteProjeto.addFase(lRender);
+		lAnteProjeto.addFase(lAprovacaoCliente);
+		lAnteProjeto.addFase(lAprovacaoPrefeitura);
+		lAnteProjeto.addFase(lAprovacaoCondominio);
+		
+		faseDao.saveFases(lFases);
+	}
+	
+	//Metodo que cria um novo preProjeto com sua devias fases
+	private void newPreProjeto(Projeto pProjeto) {
+		
+		PreProjeto lPreProjeto = new PreProjeto();
+		lPreProjeto.setProjeto(pProjeto);
+		preProjetoDao.save(lPreProjeto);
+		
 		Fase lContrato = new Fase("Contrato");
 		Fase lDocumento = new Fase("Documentos");
 		Fase lLevantamento = new Fase("Levantamento Planialtimátrico");
 		List<Fase> lFases = new ArrayList<>();
 		
-		lAnteProjeto.addFase(lContrato);
-		lAnteProjeto.addFase(lDocumento);
-		lAnteProjeto.addFase(lLevantamento);
+		lPreProjeto.addFase(lContrato);
+		lPreProjeto.addFase(lDocumento);
+		lPreProjeto.addFase(lLevantamento);
+		
+		faseDao.saveFases(lFases);
+	}
+	
+	//Metodo que cria um novo preProjeto com sua devias fases
+	private void newProjetoFinal(Projeto pProjeto) {
+		
+		ProjetoFinal lProjetoFinal1 = new ProjetoFinal();
+		ProjetoFinal lProjetoFinal2 = new ProjetoFinal();
+		lProjetoFinal1.setProjeto(pProjeto);
+		lProjetoFinal2.setProjeto(pProjeto);
+		projetoFinalDao.save(lProjetoFinal1);
+		projetoFinalDao.save(lProjetoFinal2);
+		
+		Fase lImplantacao = new Fase("Implantação");
+		Fase lConst = new Fase("Planta de à construir / a demolir");
+		Fase lExecutiva = new Fase("Planta executiva");
+		Fase lCobertura = new Fase("Planta de cobertura");
+		Fase lCortes = new Fase("Cortes");
+		Fase lElevacoes = new Fase("Elevações");
+		Fase lHidraulica = new Fase("Projeto de hidráulica");
+		Fase lEletrica = new Fase("Projeto de elétrica");
+		Fase lCircuitos = new Fase("Circuitos de iluminação");
+		Fase lGesso = new Fase("Planta de gesso");
+		Fase lPisos = new Fase("Planta de paginação de pisos");
+		Fase lParedes = new Fase("Paginação de paredes");
+		Fase lPintura = new Fase("Planta de pintura e revestimento");
+		Fase lMoveis = new Fase("Detalhamento de móveis");
+		Fase lBook = new Fase("Book");
+		List<Fase> lFases = new ArrayList<>();
+		
+		
+		lProjetoFinal1.addFase(lImplantacao);
+		lProjetoFinal1.addFase(lConst);
+		lProjetoFinal1.addFase(lExecutiva);
+		lProjetoFinal1.addFase(lCobertura);
+		lProjetoFinal1.addFase(lCortes);
+		lProjetoFinal1.addFase(lElevacoes);
+		lProjetoFinal1.addFase(lHidraulica);
+		lProjetoFinal1.addFase(lEletrica);
+		lProjetoFinal2.addFase(lCircuitos);
+		lProjetoFinal2.addFase(lGesso);
+		lProjetoFinal2.addFase(lPisos);
+		lProjetoFinal2.addFase(lParedes);
+		lProjetoFinal2.addFase(lPintura);
+		lProjetoFinal2.addFase(lMoveis);
+		lProjetoFinal2.addFase(lBook);
 		
 		faseDao.saveFases(lFases);
 	}

@@ -24,7 +24,7 @@
 								<thead>
 									<tr>
 										<th style="width:20px;"></th>
-										<c:forEach items="${fases }" var="fase">
+										<c:forEach items="${fasesAnteProjeto }" var="fase">
 											<th>${fase.descricao }</th>
 										</c:forEach>
 									</tr>
@@ -33,18 +33,18 @@
 								<tbody>
 									<tr>
 										<td style="font-weight: 600;">Prazo</td>
-										<c:forEach items="${fases }" var="fase" varStatus="count">
-											<td><input type="text" name="prazo" id="prazo${count.index }" data-id="${fase.idFase }" 
-											onblur="setPrazo(this, ${count.index })" class="form-control" value="${fase.prazo }" /></td>
+										<c:forEach items="${fasesAnteProjeto }" var="fase" varStatus="count">
+											<td><input type="text" name="prazo" id="prazoAnte${count.index }" data-id="${fase.idFase }" 
+											onblur="setPrazo(this, ${count.index }, 'Ante')" class="form-control" value="${fase.prazo }" /></td>
 											
 										</c:forEach>
 									</tr>
 									<tr>
 										<td style="font-weight: 600;">Status</td>
-										<c:forEach items="${fases }" var="fase" varStatus="count">
+										<c:forEach items="${fasesAnteProjeto }" var="fase" varStatus="count">
 										<input type="hidden" value="${fase.idFase }" id="idFase"/> 
 											<td>
-												<select class="form-control select2 select2-hidden-accessible " onChange="setStatus(this, ${count.index });" style="width: 100%;" tabindex="-1" aria-hidden="true">
+												<select class="form-control select2 select2-hidden-accessible " onChange="setStatus(this, ${count.index }, 'Ante');" style="width: 100%;" tabindex="-1" aria-hidden="true">
 								                  <c:forEach items="${statusFase }" var="status">
 								                  	<c:choose>
 									                  	<c:when test="${status == fase.status }">
@@ -62,14 +62,14 @@
 									<tr>
 										<td style="font-weight: 600;">Último responsável</td>
 										
-										<c:forEach items="${fases }" var="fase" varStatus="count">
-											<td><input type="text" id="responsavel${count.index }" name="ultimoResponsavel" class="form-control" readonly value="${fase.ultimoResponsavel.nome }" /></td>
+										<c:forEach items="${fasesAnteProjeto }" var="fase" varStatus="count">
+											<td><input type="text" id="responsavelAnte${count.index }" name="ultimoResponsavel" class="form-control" readonly value="${fase.ultimoResponsavel.nome }" /></td>
 										</c:forEach>
 									</tr>
 									<tr>
 										<td style="font-weight: 600;">Data de alteração</td>
-										<c:forEach items="${fases }" var="fase" varStatus="count">
-											<td><input type="text" name="dataAlteracao" id="dataAlteracao${count.index }" class="form-control" readonly value="${fase.dataAlteracao }" /></td>
+										<c:forEach items="${fasesAnteProjeto }" var="fase" varStatus="count">
+											<td><input type="text" name="dataAlteracao" id="dataAlteracaoAnte${count.index }" class="form-control" readonly value="${fase.dataAlteracao }" /></td>
 										</c:forEach>
 									</tr>
 								</tbody>

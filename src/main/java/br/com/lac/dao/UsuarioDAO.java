@@ -60,9 +60,13 @@ public class UsuarioDAO implements UserDetailsService {
 					pUsuario.setSenha(passwordEncoder.encode(pUsuario.getSenha()));
 					lUsuario.setSenha(pUsuario.getSenha());
 				}
-				lUsuario.setNome(pUsuario.getNome());
-				lUsuario.setEmail(pUsuario.getEmail());
+				if(pUsuario.getNome() != "")
+					lUsuario.setNome(pUsuario.getNome());
+				if(pUsuario.getEmail() != "")
+					lUsuario.setEmail(pUsuario.getEmail());
+				
 				lUsuario.setPermissao(pUsuario.getPermissao());
+				
 				return true;
 			}
 		} catch (Exception e) {

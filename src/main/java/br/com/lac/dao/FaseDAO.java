@@ -32,6 +32,16 @@ public class FaseDAO {
 				.setParameter("id", pId).getResultList();
 	}
 	
+	public List<Fase> getFasesByPreProjeto(Long pId){
+		return manager.createQuery("select f from Fase f where f.preProjeto.idPreProjeto = :id", Fase.class)
+				.setParameter("id", pId).getResultList();
+	}
+	
+	public List<Fase> getFasesByProjetoFinal(Long pId){
+		return manager.createQuery("select f from Fase f where f.projetoFinal.idProjetoFinal = :id", Fase.class)
+				.setParameter("id", pId).getResultList();
+	}
+	
 	public Fase alterStatus(Fase pFase, Usuario pUsuario) {
 		
 		DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

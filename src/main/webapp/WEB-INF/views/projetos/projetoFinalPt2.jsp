@@ -8,7 +8,7 @@
 				<div class="box box-primary">
 
 					<div class="box-header">
-						<h3 class="box-title">Pré-projeto</h3>
+						<h3 class="box-title">Projeto</h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool"
 								data-widget="collapse">
@@ -24,7 +24,7 @@
 								<thead>
 									<tr>
 										<th style="width:20px;"></th>
-										<c:forEach items="${fasesPreProjeto }" var="fase">
+										<c:forEach items="${fasesProjetoFinal2 }" var="fase">
 											<th>${fase.descricao }</th>
 										</c:forEach>
 									</tr>
@@ -33,18 +33,18 @@
 								<tbody>
 									<tr>
 										<td style="font-weight: 600;">Prazo</td>
-										<c:forEach items="${fasesPreProjeto }" var="fase" varStatus="count">
-											<td><input type="text" name="prazo" id="prazoPre${count.index }" data-id="${fase.idFase }" 
-											onblur="setPrazo(this, ${count.index }, 'Pre')" class="form-control" value="${fase.prazo }" /></td>
+										<c:forEach items="${fasesProjetoFinal2 }" var="fase" varStatus="count">
+											<td><input type="text" name="prazo" id="prazoFinal2${count.index }" data-id="${fase.idFase }" 
+											onblur="setPrazo(this, ${count.index }, 'Final2')" class="form-control" value="${fase.prazo }" /></td>
 											
 										</c:forEach>
 									</tr>
 									<tr>
 										<td style="font-weight: 600;">Status</td>
-										<c:forEach items="${fasesPreProjeto }" var="fase" varStatus="count">
+										<c:forEach items="${fasesProjetoFinal2 }" var="fase" varStatus="count">
 										<input type="hidden" value="${fase.idFase }" id="idFase"/> 
 											<td>
-												<select class="form-control select2 select2-hidden-accessible " onChange="setStatus(this, ${count.index }, 'Pre');" style="width: 100%;" tabindex="-1" aria-hidden="true">
+												<select class="form-control select2 select2-hidden-accessible " onChange="setStatus(this, ${count.index }, 'Final2');" style="width: 100%;" tabindex="-1" aria-hidden="true">
 								                  <c:forEach items="${statusFase }" var="status">
 								                  	<c:choose>
 									                  	<c:when test="${status == fase.status }">
@@ -62,14 +62,14 @@
 									<tr>
 										<td style="font-weight: 600;">Último responsável</td>
 										
-										<c:forEach items="${fasesPreProjeto }" var="fase" varStatus="count">
-											<td><input type="text" id="responsavelPre${count.index }" name="ultimoResponsavel" class="form-control" readonly value="${fase.ultimoResponsavel.nome }" /></td>
+										<c:forEach items="${fasesProjetoFinal2 }" var="fase" varStatus="count">
+											<td><input type="text" id="responsavelFinal2${count.index }" name="ultimoResponsavel" class="form-control" readonly value="${fase.ultimoResponsavel.nome }" /></td>
 										</c:forEach>
 									</tr>
 									<tr>
 										<td style="font-weight: 600;">Data de alteração</td>
-										<c:forEach items="${fasesPreProjeto }" var="fase" varStatus="count">
-											<td><input type="text" name="dataAlteracao" id="dataAlteracaoPre${count.index }" class="form-control" readonly value="${fase.dataAlteracao }" /></td>
+										<c:forEach items="${fasesProjetoFinal2 }" var="fase" varStatus="count">
+											<td><input type="text" name="dataAlteracao" id="dataAlteracaoFinal2${count.index }" class="form-control" readonly value="${fase.dataAlteracao }" /></td>
 										</c:forEach>
 									</tr>
 								</tbody>

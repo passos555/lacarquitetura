@@ -1,9 +1,9 @@
-function setStatus(pObj, pCampo){
+function setStatus(pObj, pCampo, pFase){
 	
 	var lAux = $(pObj).val().split(",");
 	var lIdFase = lAux[0];
 	var lStatus = lAux[1];
-	
+
 	var fase = {
 		"idFase": lIdFase,
 		"status": lStatus
@@ -16,8 +16,8 @@ function setStatus(pObj, pCampo){
 	    data: JSON.stringify(fase),
 	    dataType: 'json',
 	    success: function(response){
-	    	 $('#responsavel' + pCampo).val($('#usuarioLogado').val());
-	    	 $('#dataAlteracao' + pCampo).val(getDate());
+	    	 $('#responsavel' + pFase + pCampo).val($('#usuarioLogado').val());
+	    	 $('#dataAlteracao' + pFase + pCampo).val(getDate());
 	    },
 		error: function(jqXHR, textStatus, ex) {
 			console.log(textStatus + "," + ex + "," + jqXHR.responseText);
@@ -26,7 +26,7 @@ function setStatus(pObj, pCampo){
 
 }
 
-function setPrazo(pObj, pCampo){
+function setPrazo(pObj, pCampo, pFase){
 	
 	var lIdFase = $(pObj).data('id');
 	var lPrazo = $(pObj).val();
@@ -44,8 +44,8 @@ function setPrazo(pObj, pCampo){
 		    data: JSON.stringify(fase),
 		    dataType: 'json',
 		    success: function(response){
-		    	 $('#responsavel' + pCampo).val($('#usuarioLogado').val());
-		    	 $('#dataAlteracao' + pCampo).val(getDate());
+		    	 $('#responsavel' + pFase + pCampo).val($('#usuarioLogado').val());
+		    	 $('#dataAlteracao' + pFase + pCampo).val(getDate());
 		    },
 			error: function(jqXHR, textStatus, ex) {
 				console.log(textStatus + "," + ex + "," + jqXHR.responseText);

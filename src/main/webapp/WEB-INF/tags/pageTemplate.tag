@@ -73,7 +73,7 @@
 		<script src="${contextPath}resources/myScripts/endereco.js"></script>
 		<script src="${contextPath}resources/myScripts/categorias.js"></script>
 		<script src="${contextPath}resources/myScripts/tiposprojeto.js"></script>
-		<script src="${contextPath}resources/myScripts/anteprojeto.js"></script>
+		<script src="${contextPath}resources/myScripts/fases.js"></script>
 		<script src="${contextPath}resources/myScripts/waitMe.min.js"></script>
 		<script>
 			//Retira mensagens do HTML5
