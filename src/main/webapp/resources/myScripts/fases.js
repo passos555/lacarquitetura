@@ -3,10 +3,10 @@ function setStatus(pObj, pCampo, pFase){
 	var lAux = $(pObj).val().split(",");
 	var lIdFase = lAux[0];
 	var lStatus = lAux[1];
-
+	
 	var fase = {
 		"idFase": lIdFase,
-		"status": lStatus
+		"status": lStatus,
 	};
 	
 	$.ajax({ 
@@ -18,9 +18,10 @@ function setStatus(pObj, pCampo, pFase){
 	    success: function(response){
 	    	 $('#responsavel' + pFase + pCampo).val($('#usuarioLogado').val());
 	    	 $('#dataAlteracao' + pFase + pCampo).val(getDate());
+	    	 notifySuccess('Status alterado com sucesso!');	 
 	    },
-		error: function(jqXHR, textStatus, ex) {
-			console.log(textStatus + "," + ex + "," + jqXHR.responseText);
+		error: function() {
+			notifyError('N&atilde;o foi poss&iacute;vel alterar o status!');
 		}
 	}).responseJSON;
 
@@ -30,30 +31,30 @@ function setPrazo(pObj, pCampo, pFase){
 	
 	var lIdFase = $(pObj).data('id');
 	var lPrazo = $(pObj).val();
-
+	
 	var fase = {
 		"idFase": lIdFase,
-		"prazo": lPrazo
+		"prazo": lPrazo,
 	};
 	
-	if(lPrazo != ""){
-		$.ajax({ 
-		    url:"/lac/projetos/savePrazo",    
-		    type:"POST", 
-		    contentType: "application/json; charset=utf-8",
-		    data: JSON.stringify(fase),
-		    dataType: 'json',
-		    success: function(response){
-		    	 $('#responsavel' + pFase + pCampo).val($('#usuarioLogado').val());
-		    	 $('#dataAlteracao' + pFase + pCampo).val(getDate());
-		    },
-			error: function(jqXHR, textStatus, ex) {
-				console.log(textStatus + "," + ex + "," + jqXHR.responseText);
-			}
-		}).responseJSON;
-	}
+	$.ajax({ 
+	    url:"/lac/projetos/savePrazo",    
+	    type:"POST", 
+	    contentType: "application/json; charset=utf-8",
+	    data: JSON.stringify(fase),
+	    dataType: 'json',
+	    success: function(response){
+	    	 $('#responsavel' + pFase + pCampo).val($('#usuarioLogado').val());
+	    	 $('#dataAlteracao' + pFase + pCampo).val(getDate());
+	    	 if(lPrazo != '')
+	    		 notifySuccess('Prazo alterado com sucesso!');
+	    },
+		error: function() {
+			notifyError('N&atilde;o foi poss&iacute;vel alterar o prazo!');
+		}
+	}).responseJSON;
+	
 }
-
 
 function getDate(){
 	var today = new Date();
@@ -77,4 +78,4 @@ $( "input[name='prazo']" ).datepicker({
     changeMonth: true,
     changeYear: true,
     format: 'dd/mm/yyyy'                   
-});     
+});

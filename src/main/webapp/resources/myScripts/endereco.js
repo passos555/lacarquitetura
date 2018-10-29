@@ -45,9 +45,10 @@ $("#addEndereco").on("click", function () {
 		    	 $("#endereco").append(new Option(response.idEndereco + " - " + response.rua, response.idEndereco));
 		    	 $("#endereco").val(response.idEndereco).trigger('change.select2');
 		    	 $("#uf").val("").trigger('change.select2');
+		    	 notifySuccess('Endere&ccedil;o cadastrado com sucesso!');
 		    },
-			error: function(jqXHR, textStatus, ex) {
-				console.log(textStatus + "," + ex + "," + jqXHR.responseText);
+			error: function() {
+				notifyError('N&atilde;o foi poss&iacute;vel cadastrar este endere&ccedil;o!');
 			}
 		});
 	} else {
@@ -87,9 +88,10 @@ $("#altEndereco").on("click", function () {
 		    	$(".modal-body #bairro").val( response.bairro );
 		    	$(".modal-body #cidade").val( response.cidade );
 		    	$(".modal-body #complemento").val( response.complemento );
+		    	$(".modal-body #uf").val(response.uf).trigger('change.select2');
 		    },
 			error: function(jqXHR, textStatus, ex) {
-				console.log(textStatus + "," + ex + "," + jqXHR.responseText);
+				$('#modal-novoEndereco').modal('toggle');
 			}
 		});
 	}

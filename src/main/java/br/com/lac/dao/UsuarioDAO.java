@@ -30,6 +30,16 @@ public class UsuarioDAO implements UserDetailsService {
 		pUsuario.setSenha(hasSenha);
 		manager.persist(pUsuario);
 	}
+	
+	public Long countUsers() {
+		
+		Long lCount = (Long)manager.createQuery("select count(u) from Usuario u").getSingleResult();
+		
+		if(lCount != null)
+			return lCount;
+		else
+			return (long) 0;
+	}
 
 	public Usuario findUsuarioByEmail(String pEmail) {
 		try {

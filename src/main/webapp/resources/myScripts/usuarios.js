@@ -48,9 +48,11 @@
 					$("#icon_" + id).html(" ").removeClass("fa-remove").addClass(
 							"fa-check");
 				}
+				
+				notifySuccess('Usu&aacute;rio alterado com sucesso!');
 			},
 			error: function(){
-				console.log("erro");
+				notifyError('N&atilde;o foi poss&iacute;vel alterar este usu&aacute;rio');
 			}
 		 });
 	 } else {

@@ -25,6 +25,7 @@ import br.com.lac.dao.CategoriaDAO;
 import br.com.lac.dao.ClienteDAO;
 import br.com.lac.dao.EnderecoDAO;
 import br.com.lac.dao.FaseDAO;
+import br.com.lac.dao.LogProjetoDAO;
 import br.com.lac.dao.PreProjetoDAO;
 import br.com.lac.dao.ProjetoDAO;
 import br.com.lac.dao.ProjetoFinalDAO;
@@ -37,6 +38,7 @@ import br.com.lac.models.Cliente;
 import br.com.lac.models.Endereco;
 import br.com.lac.models.Estado;
 import br.com.lac.models.Fase;
+import br.com.lac.models.LogProjeto;
 import br.com.lac.models.PreProjeto;
 import br.com.lac.models.Projeto;
 import br.com.lac.models.ProjetoFinal;
@@ -82,6 +84,12 @@ public class ProjetoController {
 	@Autowired
 	private ProjetoFinalDAO projetoFinalDao;
 	
+	@Autowired
+	private LogProjetoDAO logProjetoDao;
+	
+	private DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	private Calendar cal = Calendar.getInstance();
+	
 	//Abre view de cadastro
 	@RequestMapping("/projetos/novo")
 	public ModelAndView open() {
@@ -101,6 +109,23 @@ public class ProjetoController {
 	public ModelAndView list() {
 		
 		ModelAndView model = new ModelAndView();
+		
+		if(projetoDao.list().size() > 0) {
+			for (Projeto lProjeto : projetoDao.list()) {
+				
+				Long lValidos = projetoDao.countAplicableFases(lProjeto.getIdProjeto());
+				Long lConcluidos = projetoDao.countFinishedProject(lProjeto.getIdProjeto());
+				Double lProgresso = (lConcluidos.doubleValue() / lValidos.doubleValue()) * 100;
+				
+				lProjeto.setProgresso(lProgresso);
+				if(lProgresso >= 100) {
+					lProjeto.setStatus(StatusProjeto.Concluido);
+					lProjeto.setDataConclusao(sdf.format(cal.getTime()));
+				}
+					
+			}
+		}
+		
 		model.addObject("projetos", projetoDao.list());
 		
 		return model;
@@ -181,6 +206,7 @@ public class ProjetoController {
 		
 		ModelAndView model = new ModelAndView("projetos/detalhe");
 		Projeto lProjeto = projetoDao.getById(pId);
+		List<String> lTipos = projetoDao.getProjectTypesByProjectId(pId);
 		AnteProjeto lAnteProjeto = anteProjetoDao.getByProjectId(pId);
 		PreProjeto lPreProjeto = preProjetoDao.getByProjectId(pId);
 		List<ProjetoFinal> lProjetoFinal = projetoFinalDao.getByProjectId(pId);
@@ -193,10 +219,11 @@ public class ProjetoController {
 			lFasesProjetoFinal1 = faseDao.getFasesByProjetoFinal(lProjetoFinal.get(0).getIdProjetoFinal());
 			lFasesProjetoFinal2 = faseDao.getFasesByProjetoFinal(lProjetoFinal.get(1).getIdProjetoFinal());
 		}
-			
+		
 		model.addObject("usuarioLogado", usuarioDao.findUsuarioByEmail(pAuth.getName()));
-		model.addObject("fasesAnteProjeto", lFasesAnteProjeto);
 		model.addObject("projeto", lProjeto);
+		model.addObject("tiposProjeto", lTipos);
+		model.addObject("fasesAnteProjeto", lFasesAnteProjeto);
 		model.addObject("fasesPreProjeto", lFasesPreProjeto);
 		model.addObject("fasesProjetoFinal1", lFasesProjetoFinal1);
 		model.addObject("fasesProjetoFinal2", lFasesProjetoFinal2);
@@ -297,26 +324,49 @@ public class ProjetoController {
 		faseDao.saveFases(lFases);
 	}
 	
+	@CacheEvict(value = "projetoList", allEntries = true)
 	@RequestMapping(value = "/projetos/saveStatus" , method = RequestMethod.POST)
 	public @ResponseBody Fase saveStatus(@RequestBody Fase pFaseJson, Authentication pAuth) {
 		
 		if(pFaseJson != null) {
+			Projeto lProjeto = projetoDao.getById(projetoDao.getProjectByFaseId(pFaseJson.getIdFase()));
 			Usuario lUsuario = usuarioDao.findUsuarioByEmail(pAuth.getName());
+			String lAntes = faseDao.getFaseById(pFaseJson.getIdFase()).toString();
 			faseDao.alterStatus(pFaseJson, lUsuario);
+			String lDepois = faseDao.getFaseById(pFaseJson.getIdFase()).toString();
+			gravaLog(lProjeto, pAuth, "Alteração de Fase", lAntes, lDepois);
 		}
 			
 		return pFaseJson;
 	}
 	
+	@CacheEvict(value = "projetoList", allEntries = true)
 	@RequestMapping(value = "/projetos/savePrazo" , method = RequestMethod.POST)
 	public @ResponseBody Fase savePrazo(@RequestBody Fase pFaseJson, Authentication pAuth) {
 		
 		if(pFaseJson != null) {
+			Projeto lProjeto = projetoDao.getById(projetoDao.getProjectByFaseId(pFaseJson.getIdFase()));
 			Usuario lUsuario = usuarioDao.findUsuarioByEmail(pAuth.getName());
+			String lAntes = faseDao.getFaseById(pFaseJson.getIdFase()).toString();
 			faseDao.alterPrazo(pFaseJson, lUsuario);
+			String lDepois = faseDao.getFaseById(pFaseJson.getIdFase()).toString();
+			gravaLog(lProjeto, pAuth, "Alteração de Fase", lAntes, lDepois);
 		}
 			
 		return pFaseJson;
+	}
+	
+	
+	public void gravaLog(Projeto pProjeto, Authentication pAuth, String pTransacao, String pAntes, String pDepois) {
+		
+		LogProjeto lLogProjeto = new LogProjeto();
+		lLogProjeto.setProjeto(pProjeto);
+		lLogProjeto.setTransacao(pTransacao);
+		lLogProjeto.setData(sdf.format(cal.getTime()));
+		lLogProjeto.setUsuario(usuarioDao.findUsuarioByEmail(pAuth.getName()));
+		lLogProjeto.setAntes(pAntes);
+		lLogProjeto.setDepois(pDepois);
+		logProjetoDao.gravar(lLogProjeto);
 	}
 	
 }

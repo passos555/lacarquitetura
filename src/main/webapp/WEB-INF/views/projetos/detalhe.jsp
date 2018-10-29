@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%>
 
 
@@ -24,21 +25,21 @@
 
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="box box-primary">
+					<div class="box box-primary collapsed-box">
 
 						<div class="box-header">
 							<h3 class="box-title">Informações básicas</h3>
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
 									data-widget="collapse">
-									<i class="fa fa-minus"></i>
+									<i class="fa fa-plus"></i>
 								</button>
 							</div>
 						</div>
 
 
 						<div class="box-body">
-							
+							<input type="hidden" id="idProjeto" value="${projeto.idProjeto }"/>
 							<div class="row">
 								<div class="col-md-3">
 									<label>Cliente</label>
@@ -52,7 +53,11 @@
 								<div class="col-md-3">
 									<label>Tipo</label>
 									<div style="width: 100%" class="input-group form-group">
-										
+										<c:set var = "tipos" scope = "session" value = "${fn:replace(tiposProjeto, ',', ' /')}"/>
+										<c:set var = "tipos" scope = "session" value = "${fn:replace(tipos, '[', '')}"/>
+										<c:set var = "tipos" scope = "session" value = "${fn:replace(tipos, ']', '')}"/>
+										<input type="text" value="${tipos}"
+										class="form-control" readonly>
 									</div>
 								</div>
 								
@@ -116,9 +121,9 @@
 								<div class="col-md-6	">
 									<label>Observações</label>
 									<div style="width: 100%" class="input-group form-group">
-										<textarea style="resize: none;" value="${projeto.observacao }"
+										<textarea style="resize: none;"
 										class="form-control" name="observacao" id="observacao"
-										readonly></textarea>
+										readonly>${projeto.observacao }</textarea>
 									</div>
 								</div>
 							</div>

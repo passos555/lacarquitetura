@@ -5,14 +5,14 @@
 
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="box box-primary">
+				<div class="box box-primary collapsed-box">
 
 					<div class="box-header">
 						<h3 class="box-title">Projeto</h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool"
 								data-widget="collapse">
-								<i class="fa fa-minus"></i>
+								<i class="fa fa-plus"></i>
 							</button>
 						</div>
 					</div>
@@ -35,7 +35,7 @@
 										<td style="font-weight: 600;">Prazo</td>
 										<c:forEach items="${fasesProjetoFinal1 }" var="fase" varStatus="count">
 											<td><input type="text" name="prazo" id="prazoFinal1${count.index }" data-id="${fase.idFase }" 
-											onblur="setPrazo(this, ${count.index }, 'Final1')" class="form-control" value="${fase.prazo }" /></td>
+											onchange="setPrazo(this, ${count.index }, 'Final1')" class="form-control" value="${fase.prazo }" /></td>
 											
 										</c:forEach>
 									</tr>

@@ -17,7 +17,7 @@ public class Fase {
 	private Long idFase;
 	
 	private String descricao;
-	private String prazo;
+	private String prazo = "";
 	private String dataAlteracao;
 	private StatusFaseProjeto status;
 	
@@ -98,5 +98,9 @@ public class Fase {
 		this.projetoFinal = projetoFinal;
 	}
 	
-	
+	@Override
+	public String toString() {
+		String retorno = this.prazo + " ; " + this.status + " ; " + this.descricao;
+		return retorno;
+	}
 }

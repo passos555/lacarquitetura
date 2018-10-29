@@ -25,6 +25,16 @@ public class ClienteDAO {
 		return manager.createQuery("select c from Cliente c", Cliente.class).getResultList();
 	}
 	
+	public Long countClients() {
+		
+		Long lCount = (Long)manager.createQuery("select count(c) from Cliente c").getSingleResult();
+		
+		if(lCount != null)
+			return lCount;
+		else
+			return (long) 0;
+	}
+	
 	public Cliente getById(Long pId) {
 		return manager.createQuery("select c from Cliente c where c.idCliente = :id", Cliente.class)
 				.setParameter("id", pId).getSingleResult();

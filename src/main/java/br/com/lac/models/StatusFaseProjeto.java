@@ -5,7 +5,8 @@ public enum StatusFaseProjeto {
 	Andamento("Em andamento"),
 	Concluido("Concluído"),
 	Analise("Em análise"),
-	Revisando("Revisando");
+	Revisando("Revisando"),
+	Nao("Não se aplica");
 	
 	private String name;
 

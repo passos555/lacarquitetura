@@ -23,9 +23,12 @@ $("#addTipo").on("click", function () {
 		    	 $("#novoTipo").trigger( "reset" );
 		    	 $("#tipoProjeto").append(new Option(response.descricao, response.idTipoProjeto));
 		    	 $("#tipoProjeto").val(response.idTipoProjeto).trigger('change.select2');
+		    	 notifySuccess('Tipo cadastrado com sucesso!');
 		    },
-			error: function(jqXHR, textStatus, ex) {
-				console.log(textStatus + "," + ex + "," + jqXHR.responseText);
+			error: function() {
+				$('#modal-novoTipo').modal('toggle');
+		    	$("#novoTipo").trigger( "reset" );
+				notifyError('Este tipo j&aacute; foi cadastrado!');
 			}
 		});
 	} else {
@@ -37,7 +40,6 @@ $("#addTipo").on("click", function () {
 
 $('#modal-novoTipo').on('hidden.bs.modal', function () {
 	$("#novoTipo").trigger( "reset" );
-	//console.log($('#tipoProjeto').val());
 });
 
 $(document).on("click", ".open-Alt", function () {

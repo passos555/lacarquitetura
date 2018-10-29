@@ -23,9 +23,12 @@ $("#addCategoria").on("click", function () {
 		    	 $("#novaCategoria").trigger( "reset" );
 		    	 $("#categoria").append(new Option(response.descricao, response.idCategoria));
 		    	 $("#categoria").val(response.idCategoria).trigger('change.select2');
+		    	 notifySuccess('Categoria cadastrada com sucesso!');
 		    },
-			error: function(jqXHR, textStatus, ex) {
-				console.log(textStatus + "," + ex + "," + jqXHR.responseText);
+			error: function() {
+				$('#modal-novaCategoria').modal('toggle');
+		    	$("#novaCategoria").trigger( "reset" );
+		    	notifyError('Esta categoria j&aacute; foi cadastrada!');
 			}
 		});
 	} else {

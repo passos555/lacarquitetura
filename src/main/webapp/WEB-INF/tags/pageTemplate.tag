@@ -29,7 +29,7 @@
 		<link rel="stylesheet" href="${contextPath}resources/dist/css/AdminLTE.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/dist/css/skins/skin-pink.min.css">
 		<link rel="stylesheet" href="${contextPath}resources/myStyles/waitMe.min.css">
-
+		<link rel="stylesheet" href="${contextPath}resources/myStyles/animations.css">
 		<link rel="stylesheet"
 		      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	</head>
@@ -75,6 +75,8 @@
 		<script src="${contextPath}resources/myScripts/tiposprojeto.js"></script>
 		<script src="${contextPath}resources/myScripts/fases.js"></script>
 		<script src="${contextPath}resources/myScripts/waitMe.min.js"></script>
+		<script src="${contextPath}resources/myScripts/notify.js"></script>
+		<script src="${contextPath}resources/myScripts/logprojetos.js"></script>
 		<script>
 			//Retira mensagens do HTML5
 			$('input, select, textarea').on("invalid", function(e) {
@@ -141,6 +143,33 @@
 			$('#generalTable').DataTable( {
 			    responsive: true
 			} );
+			
+			
+			function notifySuccess(pMessage){
+				$.notify({
+		    		title: 'Sucesso!',
+					message: pMessage 
+				},{
+					type: 'success',
+					allow_dismiss: true,
+					newest_on_top: true,
+					delay: 3000,
+					timer: 1000,
+				});
+			}
+			
+			function notifyError(pMessage){
+				$.notify({
+		    		title: 'Erro!',
+					message: pMessage 
+				},{
+					type: 'danger',
+					allow_dismiss: true,
+					newest_on_top: true,
+					delay: 3000,
+					timer: 1000,
+				});
+			}
 			
 		</script>
 	</body>

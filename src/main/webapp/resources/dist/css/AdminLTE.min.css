@@ -103,7 +103,7 @@ body {
 
 .content-wrapper {
     min-height: 100%;
-    background-color: #ecf0f5;
+    background-color: #f3f3f3;
     z-index: 800
 }
 
@@ -6078,6 +6078,18 @@ table.text-center th {
 
 .bg-purple-active {
     background-color: #555299 !important
+}
+
+.bg-pink-first {
+	background-color: #e8dbd9 !important
+}
+
+.bg-pink-second {
+	background-color: #e8bfba !important
+}
+
+.bg-pink-third {
+	background-color: #dca19b !important
 }
 
 .bg-maroon-active {

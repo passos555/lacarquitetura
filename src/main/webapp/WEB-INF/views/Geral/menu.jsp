@@ -75,7 +75,17 @@
 							class="fa fa-search"></i> Consultar</a></li>
 					<li><a onclick="run_waitMe(null, 1);" href="${contextPath}usuarios/novo"><i
 							class="fa fa-plus-circle"></i> Novo</a></li>
-				</ul></li>
+				</ul>
+			</li>
+			<li class="treeview"><a href="#"><i class="fa fa-database"></i>
+					<span>Logs</span> <span class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+				</span> </a>
+				<ul class="treeview-menu">
+					<li><a onclick="run_waitMe(null, 1);" href="${contextPath}logs/projetos"><i
+							class="fa fa-folder-open"></i> Projetos</a></li>
+				</ul>
+			</li>
 		</ul>
 	</section>
 </aside>

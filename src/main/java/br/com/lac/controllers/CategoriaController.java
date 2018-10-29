@@ -55,13 +55,14 @@ public class CategoriaController {
 	//Salva nova categoria com Json
 	@CacheEvict(value = "categoryList", allEntries = true)
 	@RequestMapping(value = "/categorias/novoJson", method = RequestMethod.POST)
-	public @ResponseBody Categoria saveCategoryJson(@RequestBody Categoria pCategoriaJson){
-		System.out.println(pCategoriaJson.getDescricao());
-		if(pCategoriaJson != null)
-			categoriaDao.saveCategory(pCategoriaJson);
+	public @ResponseBody Categoria saveCategoryJson(@RequestBody Categoria pCategoriaJson) throws Error {
+
+		if(categoriaDao.findCategoryByDescription(pCategoriaJson.getDescricao())) {
+			throw new Error("Esta categoria já foi cadastrada!");
+		}
 		
+		categoriaDao.saveCategory(pCategoriaJson);
 		return pCategoriaJson;
-		
 	}
 	
 	//Altera categoria

@@ -7,7 +7,7 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title">Novo Endereço</h4>
+						<h4 class="modal-title">Endereço</h4>
 					</div>
 
 					<div class="modal-body">

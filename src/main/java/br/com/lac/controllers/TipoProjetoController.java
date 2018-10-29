@@ -43,25 +43,26 @@ public class TipoProjetoController {
 		ModelAndView model = new ModelAndView("redirect:/tipos/novo");
 
 		if (tipoProjetoDao.findProjectTypeByDescription(pTipoProjeto.getDescricao())) {
-			redirectAttributes.addFlashAttribute("erro", "Esta categoria já foi cadastrada!");
+			redirectAttributes.addFlashAttribute("erro", "Este tipo já foi cadastrado!");
 			return model;
 		}
 
 		tipoProjetoDao.saveProjectType(pTipoProjeto);
-		redirectAttributes.addFlashAttribute("sucesso", "Categoria cadastrada com sucesso!");
+		redirectAttributes.addFlashAttribute("sucesso", "Tipo cadastrado com sucesso!");
 		return model;
 	}
 
 	// Salva novo tipo com Json
 	@CacheEvict(value = "projectTypeList", allEntries = true)
 	@RequestMapping(value = "/tipos/novoJson", method = RequestMethod.POST)
-	public @ResponseBody TipoProjeto saveProjectTypeJson(@RequestBody TipoProjeto pTipoProjetoJson) {
+	public @ResponseBody TipoProjeto saveProjectTypeJson(@RequestBody TipoProjeto pTipoProjetoJson) throws Error {
 
-		if (pTipoProjetoJson != null)
-			tipoProjetoDao.saveProjectType(pTipoProjetoJson);
-
+		if (tipoProjetoDao.findProjectTypeByDescription(pTipoProjetoJson.getDescricao())) {
+			throw new Error("Este tipo já foi cadastrado!");
+		}
+		
+		tipoProjetoDao.saveProjectType(pTipoProjetoJson);
 		return pTipoProjetoJson;
-
 	}
 	
 	//Altera tipo projeto

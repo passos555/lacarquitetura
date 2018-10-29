@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%>
 
 
@@ -35,9 +36,10 @@
 									<tr>
 										<th style="width:10px;">Código</th>
 										<th>Cliente</th>
+										<th>Progresso</th>
 										<th style="width:25px;">Status</th>
 										<th style="width:25px;">Cadastro</th>
-										<th style="width:25px;">Última alteração</th>
+										<th style="width:25px;">Data de conclusão</th>
 										<th style="width:10px;">Informações</th>
 									</tr>
 								</thead>
@@ -46,6 +48,17 @@
 										<tr>
 											<td style="text-align:center;">${projeto.idProjeto }</td>
 											<td>${projeto.cliente.nome }</td>
+											<td>
+						                    	<div class="progress-group">
+								                    <span style="float:none;" class="progress-number"><b>
+								                    	${projeto.progresso}%
+								                    </b></span>
+													 
+								                    <div class="progress sm">
+								                      <div class="progress-bar progress-bar-aqua" style="width: ${projeto.progresso}%"></div>
+								                    </div>
+								                </div>
+						                    </td>
 											<c:choose>
 												<c:when test="${projeto.status.name == 'Em andamento'}">
 													<td style="text-align:center;"><span class="label label-info">${projeto.status.name }</span></td>
@@ -59,7 +72,7 @@
 											</c:choose>
 											
 											<td style="text-align:center;">${projeto.dataCadastro }</td>
-											<td></td>
+											<td style="text-align:center;">${projeto.dataConclusao }</td>
 											<td style="text-align:center">
 												<a href="${s:mvcUrl('PC#details').arg(0, projeto.idProjeto).build() }"><i class="fa fa-plus-circle"></i></a>
 											</td>

@@ -5,14 +5,14 @@
 
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="box box-primary">
+				<div class="box box-primary collapsed-box">
 
 					<div class="box-header">
 						<h3 class="box-title">Anteprojeto</h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool"
 								data-widget="collapse">
-								<i class="fa fa-minus"></i>
+								<i class="fa fa-plus"></i>
 							</button>
 						</div>
 					</div>
@@ -35,7 +35,7 @@
 										<td style="font-weight: 600;">Prazo</td>
 										<c:forEach items="${fasesAnteProjeto }" var="fase" varStatus="count">
 											<td><input type="text" name="prazo" id="prazoAnte${count.index }" data-id="${fase.idFase }" 
-											onblur="setPrazo(this, ${count.index }, 'Ante')" class="form-control" value="${fase.prazo }" /></td>
+											onchange="setPrazo(this, ${count.index }, 'Ante')" class="form-control" value="${fase.prazo }" /></td>
 											
 										</c:forEach>
 									</tr>
@@ -44,7 +44,7 @@
 										<c:forEach items="${fasesAnteProjeto }" var="fase" varStatus="count">
 										<input type="hidden" value="${fase.idFase }" id="idFase"/> 
 											<td>
-												<select class="form-control select2 select2-hidden-accessible " onChange="setStatus(this, ${count.index }, 'Ante');" style="width: 100%;" tabindex="-1" aria-hidden="true">
+												<select class="form-control select2 select2-hidden-accessible" onChange="setStatus(this, ${count.index }, 'Ante');" style="width: 100%;" tabindex="-1" aria-hidden="true">
 								                  <c:forEach items="${statusFase }" var="status">
 								                  	<c:choose>
 									                  	<c:when test="${status == fase.status }">
