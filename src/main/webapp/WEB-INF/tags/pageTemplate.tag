@@ -77,6 +77,7 @@
 		<script src="${contextPath}resources/myScripts/waitMe.min.js"></script>
 		<script src="${contextPath}resources/myScripts/notify.js"></script>
 		<script src="${contextPath}resources/myScripts/logprojetos.js"></script>
+		<script src="${contextPath}resources/myScripts/projetos.js"></script>
 		<script>
 			//Retira mensagens do HTML5
 			$('input, select, textarea').on("invalid", function(e) {

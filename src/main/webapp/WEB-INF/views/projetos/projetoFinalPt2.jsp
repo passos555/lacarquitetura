@@ -19,7 +19,6 @@
 
 
 					<div class="box-body form-horizontal table-responsive">
-						<input type="hidden" id="usuarioLogado" value="${usuarioLogado.nome }" />
 						<table class="table table-bordered table-hover">
 								<thead>
 									<tr>

@@ -23,7 +23,7 @@ public class Projeto {
 	private String dataCadastro;
 	private String dataConclusao;
 	private StatusProjeto status;
-	private Double progresso;
+	private String progresso;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCliente")
@@ -46,11 +46,11 @@ public class Projeto {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public Double getProgresso() {
+	public String getProgresso() {
 		return progresso;
 	}
 
-	public void setProgresso(Double progresso) {
+	public void setProgresso(String progresso) {
 		this.progresso = progresso;
 	}
 

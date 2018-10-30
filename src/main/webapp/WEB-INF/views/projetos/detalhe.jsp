@@ -26,7 +26,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box box-primary collapsed-box">
-
+						<input type="hidden" id="usuarioLogado" value="${usuarioLogado.nome }" />
 						<div class="box-header">
 							<h3 class="box-title">Informações básicas</h3>
 							<div class="box-tools pull-right">

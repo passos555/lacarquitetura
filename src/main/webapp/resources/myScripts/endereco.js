@@ -87,6 +87,7 @@ $("#altEndereco").on("click", function () {
 		    	$(".modal-body #rua").val( response.rua );
 		    	$(".modal-body #bairro").val( response.bairro );
 		    	$(".modal-body #cidade").val( response.cidade );
+		    	$(".modal-body #numero").val( response.numero );
 		    	$(".modal-body #complemento").val( response.complemento );
 		    	$(".modal-body #uf").val(response.uf).trigger('change.select2');
 		    },

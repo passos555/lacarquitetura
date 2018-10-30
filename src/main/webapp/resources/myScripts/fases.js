@@ -1,5 +1,5 @@
 function setStatus(pObj, pCampo, pFase){
-	
+
 	var lAux = $(pObj).val().split(",");
 	var lIdFase = lAux[0];
 	var lStatus = lAux[1];

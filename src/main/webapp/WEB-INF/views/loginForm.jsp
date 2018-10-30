@@ -57,10 +57,10 @@
         <p class="login-box-msg">Entre com suas informações para logar</p>
         <form:form servletRelativeAction="/login" id="login" method="post">
             <div class="form-group has-feedback">
-                <input type="text" name="username" class="form-control" required>
+                <input type="text" name="username" class="form-control" placeholder="Email" required>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" name="password" class="form-control" required>
+                <input type="password" name="password" class="form-control" placeholder="Senha" required>
             </div>
             <div class="row">
             <div class="col-xs-8">

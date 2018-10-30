@@ -117,7 +117,7 @@ public class ProjetoController {
 				Long lConcluidos = projetoDao.countFinishedProject(lProjeto.getIdProjeto());
 				Double lProgresso = (lConcluidos.doubleValue() / lValidos.doubleValue()) * 100;
 				
-				lProjeto.setProgresso(lProgresso);
+				lProjeto.setProgresso(String.format("%,.2f", lProgresso));
 				if(lProgresso >= 100) {
 					lProjeto.setStatus(StatusProjeto.Concluido);
 					lProjeto.setDataConclusao(sdf.format(cal.getTime()));
@@ -327,7 +327,7 @@ public class ProjetoController {
 	@CacheEvict(value = "projetoList", allEntries = true)
 	@RequestMapping(value = "/projetos/saveStatus" , method = RequestMethod.POST)
 	public @ResponseBody Fase saveStatus(@RequestBody Fase pFaseJson, Authentication pAuth) {
-		
+
 		if(pFaseJson != null) {
 			Projeto lProjeto = projetoDao.getById(projetoDao.getProjectByFaseId(pFaseJson.getIdFase()));
 			Usuario lUsuario = usuarioDao.findUsuarioByEmail(pAuth.getName());
@@ -367,6 +367,12 @@ public class ProjetoController {
 		lLogProjeto.setAntes(pAntes);
 		lLogProjeto.setDepois(pDepois);
 		logProjetoDao.gravar(lLogProjeto);
+	}
+	
+	@RequestMapping(value = "/projetos/getJson" , method = RequestMethod.POST)
+	public @ResponseBody Projeto getJson(@RequestBody Projeto pProjetoJson) {
+		
+		return projetoDao.getById(pProjetoJson.getIdProjeto());
 	}
 	
 }

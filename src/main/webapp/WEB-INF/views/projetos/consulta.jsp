@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%>
 
@@ -40,7 +41,8 @@
 										<th style="width:25px;">Status</th>
 										<th style="width:25px;">Cadastro</th>
 										<th style="width:25px;">Data de conclusão</th>
-										<th style="width:10px;">Informações</th>
+										<th style="width:8%">Informações</th>
+										<th style="width:8%">Alterar</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -55,7 +57,7 @@
 								                    </b></span>
 													 
 								                    <div class="progress sm">
-								                      <div class="progress-bar progress-bar-aqua" style="width: ${projeto.progresso}%"></div>
+								                      <div class="progress-bar progress-bar-aqua" style="width: ${fn:replace(projeto.progresso, ',', '.')}%"></div>
 								                    </div>
 								                </div>
 						                    </td>
@@ -76,6 +78,10 @@
 											<td style="text-align:center">
 												<a href="${s:mvcUrl('PC#details').arg(0, projeto.idProjeto).build() }"><i class="fa fa-plus-circle"></i></a>
 											</td>
+											<td align="center">
+							                  	<a href="#" id="altProjeto${projeto.idProjeto }" onclick="altProjeto(${projeto.idProjeto })"
+                    				 			title="Alterar endereço"><i class="fa fa-wrench"></i></a>
+							                 </td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -85,6 +91,8 @@
 				</div>
 			</div>
 		</section>
+
+		<%@ include file="/WEB-INF/views/projetos/modalAlteracao.jsp" %>
 
 		<a href="/lac/projetos/novo" title="Novo Projeto"
 			class="btnNovo"> <i class="fa fa-plus my-float"></i>
