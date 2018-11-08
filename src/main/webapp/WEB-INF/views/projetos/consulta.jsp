@@ -41,7 +41,7 @@
 										<th style="width:25px;">Status</th>
 										<th style="width:25px;">Cadastro</th>
 										<th style="width:25px;">Data de conclusão</th>
-										<th style="width:8%">Informações</th>
+										<th style="width:8%">Mais Info.</th>
 										<th style="width:8%">Alterar</th>
 									</tr>
 								</thead>

@@ -18,17 +18,17 @@
      element: 'bar-chart',
      resize: true,
      data: [
-       {y: '2006', a: 100, b: 90},
-       {y: '2007', a: 75, b: 65},
-       {y: '2008', a: 50, b: 40},
-       {y: '2009', a: 75, b: 65},
-       {y: '2010', a: 50, b: 40},
-       {y: '2011', a: 75, b: 65},
-       {y: '2012', a: 100, b: 90}
+       {y: 'Jul', a: 2, b: 4},
+       {y: 'Ago', a: 1, b: 2},
+       {y: 'Set', a: 5, b: 2},
+       {y: 'Out', a: 3, b: 4},
+       {y: 'Nov', a: 2, b: 2},
+       {y: 'Dez', a: 0, b: 0},
+       {y: 'Jan', a: 0, b: 0}
      ],
-     barColors: ['#00a65a', '#f56954'],
+     barColors: ['#dca19b', '#e8dbd9'],
      xkey: 'y',
      ykeys: ['a', 'b'],
-     labels: ['CPU', 'DISK'],
+     labels: ['Concluidos', 'Novos'],
      hideHover: 'auto'
    });

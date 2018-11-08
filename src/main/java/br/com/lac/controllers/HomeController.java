@@ -33,7 +33,6 @@ public class HomeController {
 		
 		model.addObject("clientes", clienteDao.countClients());
 		
-		
 		model.addObject("usuarios", usuarioDao.countUsers());
 		
 		return model;

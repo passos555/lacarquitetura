@@ -14,12 +14,11 @@
 
 			<div class="modal-body">
 				<div class="box-body">
-					<form:form id="alteraProjeto"
-						action="${s:mvcUrl('CC#alter').build() }" method="POST">
+					<form:form id="alteraProjeto" action="#" method="POST">
 						<input type="hidden" value="" name="idProjeto" id="idProjeto">
 						<div class="row">
 
-							<div class="col-md-5">
+							<div class="col-md-6">
 								<label>Tipo Projeto</label>
 								<div style="width: 100%" class="input-group form-group">
 									<input type="text" class="form-control" name="tipo" id="tipo"
@@ -27,7 +26,7 @@
 								</div>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<label>Categoria*</label>
 								<div style="width: 100%" class="input-group form-group">
 									<input type="text" class="form-control" name="categoria" id="categoria"
@@ -35,28 +34,24 @@
 								</div>
 							</div>
 
-							<div class="col-md-4">
-								<label>Medidas do terreno*</label>
-								<div style="width: 100%" class="input-group form-group">
-									<input type="email" class="form-control" name="email"
-										id="email" required>
-								</div>
-							</div>
+							
 						</div>
 
 						<div class="row">
-							<div class="col-md-4">
-								<label>Endereço*</label>
+						
+							<div class="col-md-6">
+								<label>Medidas do terreno*</label>
 								<div style="width: 100%" class="input-group form-group">
-									<input type="text" class="form-control" name="telefone"
-										id="telefone" required>
+									<input type="email" class="form-control col-md-2" name="email"
+										id="email" required>
 								</div>
 							</div>
-
-							<div class="col-md-4">
-								<label>Observação</label>
+							
+							<div class="col-md-6">
+								<label>Medida da construção*</label>
 								<div style="width: 100%" class="input-group form-group">
-									<input type="text" class="form-control" name="cpf" id="cpf">
+									<input type="email" class="form-control col-md-2" name="email"
+										id="email" required>
 								</div>
 							</div>
 

@@ -48,7 +48,11 @@
 										<c:if test="${!cliente.secundario }">
 											<tr>
 												<td>${cliente.idCliente }</td>
-												<td>${cliente.nome }</td>
+												<td>${cliente.nome }
+													<c:if test="${not empty cliente.clienteSec.nome }">
+														<span> / ${cliente.clienteSec.nome }</span>
+													</c:if>
+												</td>
 												<td>${cliente.email }</td>
 												<td>${cliente.tipoCliente.toString() }</td>
 												<td align="center"><a class="open-Info"

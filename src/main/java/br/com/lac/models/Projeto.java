@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Projeto {
 	
@@ -69,7 +71,8 @@ public class Projeto {
 	public void setDataCadastro(String dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-
+	
+	@JsonIgnore
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -93,7 +96,8 @@ public class Projeto {
 	public void setIdProjeto(Long idProjeto) {
 		this.idProjeto = idProjeto;
 	}
-
+	
+	@JsonIgnore
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -133,5 +137,4 @@ public class Projeto {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
 }

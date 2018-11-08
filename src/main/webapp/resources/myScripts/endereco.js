@@ -43,6 +43,7 @@ $("#addEndereco").on("click", function () {
 		    	 $('#modal-novoEndereco').modal('toggle');
 		    	 $("#novoEndereco").trigger( "reset" );
 		    	 $("#endereco").append(new Option(response.idEndereco + " - " + response.rua, response.idEndereco));
+		    	 $("#enderecoSec").append(new Option(response.idEndereco + " - " + response.rua, response.idEndereco));
 		    	 $("#endereco").val(response.idEndereco).trigger('change.select2');
 		    	 $("#uf").val("").trigger('change.select2');
 		    	 notifySuccess('Endere&ccedil;o cadastrado com sucesso!');
@@ -158,7 +159,7 @@ $("#addEnderecoSec").on("click", function () {
     	 $("#novoEnderecoSec").trigger( "reset" );
     	 $("#ufSec").val("").trigger('change.select2');
 	}
-});
+}).responseJSON;
 
 
 $('#modal-novoEnderecoSec').on('hidden.bs.modal', function () {

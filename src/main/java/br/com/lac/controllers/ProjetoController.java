@@ -118,7 +118,7 @@ public class ProjetoController {
 				Double lProgresso = (lConcluidos.doubleValue() / lValidos.doubleValue()) * 100;
 				
 				lProjeto.setProgresso(String.format("%,.2f", lProgresso));
-				if(lProgresso >= 100) {
+				if(lProgresso >= 100 && lProjeto.getStatus() != StatusProjeto.Concluido) {
 					lProjeto.setStatus(StatusProjeto.Concluido);
 					lProjeto.setDataConclusao(sdf.format(cal.getTime()));
 				}
@@ -139,7 +139,8 @@ public class ProjetoController {
 							 @RequestParam String pCategoria,
 							 @RequestParam String pTipoProjeto,
 							 @RequestParam String pCliente,
-							 RedirectAttributes redirectAttributes) {
+							 RedirectAttributes redirectAttributes,
+							 Authentication pAuth) {
 		
 		ModelAndView model = new ModelAndView("redirect:/projetos/novo");
 		
@@ -196,6 +197,7 @@ public class ProjetoController {
 		pProjeto.setStatus(StatusProjeto.Andamento);
 		projetoDao.saveProject(pProjeto);
 		redirectAttributes.addFlashAttribute("sucesso", "Projeto cadastrado com sucesso!");
+		gravaLog(pProjeto, pAuth, "Cadastro", "", pProjeto.toString());
 		
 		return model;
 	}

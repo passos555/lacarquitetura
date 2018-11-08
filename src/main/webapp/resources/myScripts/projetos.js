@@ -35,7 +35,7 @@ function altProjeto(pId) {
 	var idProjeto = pId;
 	
 	var projeto = {
-		"idProjeto": idProjeto
+		"idProjeto": idProjeto,
 	};
 	
 	$.ajax({ 
@@ -45,8 +45,9 @@ function altProjeto(pId) {
 	    data: JSON.stringify(projeto),
 	    dataType: 'json',
 	    success: function(response){
+	    	
 	    	$('#modal-altProjeto').modal('toggle');
-	    	$(".modal-body #id").html( response.idProjeto );
+	    	/*$(".modal-body #id").html( response.idProjeto );
 	    	$(".modal-body #idProjeto").val( response.idProjeto );
 	    	//$(".modal-body #cep").val( response.cep );
 	    	$(".modal-body #categoria").val( response.categoria );
@@ -54,10 +55,11 @@ function altProjeto(pId) {
 	    	$(".modal-body #cidade").val( response.cidade );
 	    	$(".modal-body #numero").val( response.numero );
 	    	$(".modal-body #complemento").val( response.complemento );
-	    	//$(".modal-body #uf").val(response.uf).trigger('change.select2');
+	    	//$(".modal-body #uf").val(response.uf).trigger('change.select2');*/
 	    },
 		error: function(jqXHR, textStatus, ex) {
-			$('#modal-novoEndereco').modal('toggle');
+			console.log(textStatus + "," + ex + "," + jqXHR.responseText);
+			//$('#modal-novoEndereco').modal('toggle');
 		}
-	});
+	}).responseJSON;
 };
