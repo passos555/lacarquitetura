@@ -1,3 +1,4 @@
+<!-- Copyright <2018> <AdminLTE.IO>  -->
 <div class="modal fade modal4" id="modal-novoTipo">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">

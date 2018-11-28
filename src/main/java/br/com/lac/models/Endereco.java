@@ -65,6 +65,15 @@ public class Endereco {
 	}
 	
 	@JsonIgnore
+	public List<Projeto> getProjetos() {
+		return projetos;
+	}
+
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
+	}
+	
+	@JsonIgnore
 	public List<Cliente> getClientes() {
 		return clientes;
 	}

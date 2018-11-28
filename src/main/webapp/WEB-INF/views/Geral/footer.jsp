@@ -1,3 +1,4 @@
+<!-- Copyright <2018> <AdminLTE.IO>  -->
 <%@tag pageEncoding="UTF-8"%>
   <footer class="main-footer">
     <!-- To the right -->

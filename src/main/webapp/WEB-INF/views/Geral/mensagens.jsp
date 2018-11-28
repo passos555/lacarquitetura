@@ -1,3 +1,4 @@
+<!-- Copyright <2018> <AdminLTE.IO>  -->
 <c:if test="${not empty sucesso }">
 				<div class="alert alert-success alert-dismissible"
 					style="margin-bottom: 0px;">

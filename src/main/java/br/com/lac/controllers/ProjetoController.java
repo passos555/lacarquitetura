@@ -104,6 +104,7 @@ public class ProjetoController {
 		return model;
 	}
 	
+	//Abre view de consulta
 	@Cacheable(value = "projetoList")
 	@RequestMapping("/projetos/consulta")
 	public ModelAndView list() {
@@ -127,6 +128,7 @@ public class ProjetoController {
 		}
 		
 		model.addObject("projetos", projetoDao.list());
+		model.addObject("statusProjeto", StatusProjeto.values());
 		
 		return model;
 	}
@@ -198,6 +200,30 @@ public class ProjetoController {
 		projetoDao.saveProject(pProjeto);
 		redirectAttributes.addFlashAttribute("sucesso", "Projeto cadastrado com sucesso!");
 		gravaLog(pProjeto, pAuth, "Cadastro", "", pProjeto.toString());
+		
+		return model;
+	}
+	
+	//Altera  projeto
+	@CacheEvict(value = "projetoList", allEntries = true)
+	@RequestMapping(value = "/projetos/alter", method = RequestMethod.POST)
+	public ModelAndView alter(Projeto pProjeto,
+							 RedirectAttributes redirectAttributes,
+							 Authentication pAuth) {
+		
+		ModelAndView model = new ModelAndView("redirect:/projetos/consulta");
+		
+		String lAntes = projetoDao.getById(pProjeto.getIdProjeto()).toString();
+		String lDepois = "";
+		
+		if(projetoDao.alterProject(pProjeto)) {
+			lDepois = pProjeto.toString();
+			redirectAttributes.addFlashAttribute("sucesso", "Projeto alterado com sucesso!");
+			gravaLog(pProjeto, pAuth, "Alteração de Dados", lAntes, lDepois);
+		} else {
+			redirectAttributes.addFlashAttribute("erro", "Não foi possível alterar o projeto!");
+		}
+			
 		
 		return model;
 	}
@@ -376,5 +402,6 @@ public class ProjetoController {
 		
 		return projetoDao.getById(pProjetoJson.getIdProjeto());
 	}
+	
 	
 }

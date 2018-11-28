@@ -18,5 +18,6 @@ public class ProjetoXTipoDAO {
 	public void saveProjectXType(ProjetoXTipo pProjetoXTipo) {
 		manager.persist(pProjetoXTipo);
 	}
+
 	
 }

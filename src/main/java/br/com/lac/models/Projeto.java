@@ -39,7 +39,6 @@ public class Projeto {
     @JoinColumn(name = "idEndereco")
 	private Endereco endereco;
 	
-	
 	public String getDataConclusao() {
 		return dataConclusao;
 	}
@@ -88,7 +87,7 @@ public class Projeto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-
+	
 	public Long getIdProjeto() {
 		return idProjeto;
 	}
@@ -137,4 +136,11 @@ public class Projeto {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+
+	@Override
+	public String toString() {
+		return status + ";" + medidaConstrucao + ";" + medidaTerreno1 + ";" + medidaTerreno2;
+	}
+	
+	
 }

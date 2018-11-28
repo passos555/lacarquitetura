@@ -1,5 +1,5 @@
 <!-- Copyright <2018> <AdminLTE.IO>  -->
-<div class="modal fade modalFase" id="modal-InfoFase">
+<div class="modal fade modalDados" id="modal-InfoDados">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -7,13 +7,12 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title">Informações Log - Alteração de Fase</h4>
+				<h4 class="modal-title">Informações Log - Alteração de Dados</h4>
 			</div>
 			<div class="modal-body">
 
 				<div class="box-body">
 					<div class="form-group">
-						<h4 class="box-title" id="descricao"></h4>
 						<table class="table table-striped" style="border: 2px solid;">
 							<tbody>
 								<tr>
@@ -22,17 +21,31 @@
 									<th width="44%">Depois</th>
 								</tr>
 								<tr>
-									<td style="border-right: 2px solid;">Prazo</td>
-									<td><input type="text" id="prazoAntes" readOnly>
+									<td style="border-right: 2px solid;">Status</td>
+									<td><input type="text" id="statusAntes" readOnly>
 									</td>
-									<td><input type="text" id="prazoDepois"
+									<td><input type="text" id="statusDepois"
 										readOnly></td>
 								</tr>
 								<tr>
-									<td style="border-right: 2px solid;">Status</td>
-									<td><input type="text" id="statusAntes" readOnly
+									<td style="border-right: 2px solid;">Medida Const.</td>
+									<td><input type="text" id="medidaConstrucaoAntes" readOnly
 										style="background-color: #f9f9f9;"></td>
-									<td><input type="text" id="statusDepois"
+									<td><input type="text" id="medidaConstrucaoDepois"
+										readOnly style="background-color: #f9f9f9;"></td>
+								</tr>
+								<tr>
+									<td style="border-right: 2px solid;">Medida Terreno</td>
+									<td><input type="text" id="medidaTerreno1Antes" readOnly>
+									</td>
+									<td><input type="text" id="medidaTerreno1Depois"
+										readOnly></td>
+								</tr>
+								<tr>
+									<td style="border-right: 2px solid;">Medida Terreno</td>
+									<td><input type="text" id="medidaTerreno2Antes" readOnly
+										style="background-color: #f9f9f9;"></td>
+									<td><input type="text" id="medidaTerreno2Depois"
 										readOnly style="background-color: #f9f9f9;"></td>
 								</tr>
 							</tbody>

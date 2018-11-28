@@ -47,15 +47,14 @@ function altProjeto(pId) {
 	    success: function(response){
 	    	
 	    	$('#modal-altProjeto').modal('toggle');
-	    	/*$(".modal-body #id").html( response.idProjeto );
+	    	$(".modal-title #id").html( response.idProjeto );
 	    	$(".modal-body #idProjeto").val( response.idProjeto );
-	    	//$(".modal-body #cep").val( response.cep );
-	    	$(".modal-body #categoria").val( response.categoria );
-	    	$(".modal-body #bairro").val( response.bairro );
-	    	$(".modal-body #cidade").val( response.cidade );
-	    	$(".modal-body #numero").val( response.numero );
-	    	$(".modal-body #complemento").val( response.complemento );
-	    	//$(".modal-body #uf").val(response.uf).trigger('change.select2');*/
+	    	$(".modal-body #dataCadastro").val( response.dataCadastro );
+	    	$(".modal-body #medidaTerreno1").val( response.medidaTerreno1 );
+	    	$(".modal-body #medidaTerreno2").val( response.medidaTerreno2 );
+	    	$(".modal-body #medidaConstrucao").val( response.medidaConstrucao );
+	    	$(".modal-body #status").val(response.status).trigger('change.select2');
+	    	$(".modal-body #categoria").val(response.categoria.idCategoria).trigger('change.select2');
 	    },
 		error: function(jqXHR, textStatus, ex) {
 			console.log(textStatus + "," + ex + "," + jqXHR.responseText);
@@ -63,3 +62,5 @@ function altProjeto(pId) {
 		}
 	}).responseJSON;
 };
+
+

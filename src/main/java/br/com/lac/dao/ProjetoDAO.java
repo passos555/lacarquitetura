@@ -23,6 +23,20 @@ public class ProjetoDAO {
 		manager.persist(pProjeto);
 	}
 	
+	public boolean alterProject(Projeto pProjeto) {
+		
+		Projeto lProjeto = getById(pProjeto.getIdProjeto());
+		
+		if(lProjeto != null) {
+			lProjeto.setMedidaConstrucao(pProjeto.getMedidaConstrucao());
+			lProjeto.setMedidaTerreno1(pProjeto.getMedidaTerreno1());
+			lProjeto.setMedidaTerreno2(pProjeto.getMedidaTerreno2());
+			lProjeto.setStatus(pProjeto.getStatus());
+			return true;
+		} else
+			return false;
+	}
+	
 	public Long countProjct() {
 		
 		Long lCount = (Long)manager.createQuery("select count(p) from Projeto p").getSingleResult();

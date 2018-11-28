@@ -66,19 +66,19 @@ public class TipoProjetoController {
 	}
 	
 	//Altera tipo projeto
-		@CacheEvict(value = "projectTypeList", allEntries = true)
-		@RequestMapping(value = "/tipos/altera", method = RequestMethod.POST)
-		public ModelAndView alterProjectType(TipoProjeto pTipoProjeto, RedirectAttributes redirectAttributes){
+	@CacheEvict(value = "projectTypeList", allEntries = true)
+	@RequestMapping(value = "/tipos/altera", method = RequestMethod.POST)
+	public ModelAndView alterProjectType(TipoProjeto pTipoProjeto, RedirectAttributes redirectAttributes){
+		
+		ModelAndView model = new ModelAndView("redirect:/tipos/consulta");
+		
+		if(tipoProjetoDao.alterProjectType(pTipoProjeto)) 
+			redirectAttributes.addFlashAttribute("sucesso", "Tipo de projeto alterado com sucesso!");
+		else
+			redirectAttributes.addFlashAttribute("erro", "Este tipo de projeto já foi cadastrado!");
 			
-			ModelAndView model = new ModelAndView("redirect:/tipos/consulta");
-			
-			if(tipoProjetoDao.alterProjectType(pTipoProjeto)) 
-				redirectAttributes.addFlashAttribute("sucesso", "Tipo de projeto alterado com sucesso!");
-			else
-				redirectAttributes.addFlashAttribute("erro", "Este tipo de projeto já foi cadastrado!");
-				
-			
-			return model;
-		}
+		
+		return model;
+	}
 
 }
